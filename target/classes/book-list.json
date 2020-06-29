@@ -1,0 +1,19 @@
+{
+  "books": [
+    {
+      "title": "Art of War",
+      "author": "Sun Tzu",
+      "year": "500"
+    },
+    {
+      "title": "Infinite Jest",
+      "author": "David Foster Wallace",
+      "year": "1996"
+    },
+    {
+      "title": "David and Goliath",
+      "author": "Malcolm Gladwell",
+      "year": "2013"
+    }
+  ]
+}

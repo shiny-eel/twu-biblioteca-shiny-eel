@@ -9,15 +9,11 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 import java.io.PrintStream;
-import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.startsWith;
-import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 
 public class BibliotecaTest {
 
@@ -55,7 +51,7 @@ public class BibliotecaTest {
     @Test
     public void testShowBookTitleAuthorYear() {
         BibliotecaApp.main(new String[]{});
-        verify(mockOut, atLeastOnce()).println(captor.capture());
+        verify(mockOut, atLeast(4)).println(captor.capture());
         final List<String> capturedArgument = captor.getAllValues();
         assertThat(capturedArgument, hasItem("Art of War | Sun Tzu | 500"));
         assertThat(capturedArgument, hasItem("Infinite Jest | David Foster Wallace | 1996"));
