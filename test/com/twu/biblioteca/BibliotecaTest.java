@@ -22,6 +22,8 @@ public class BibliotecaTest {
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
+    @Captor
+    private ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 
     private PrintStream mockOut;
 
@@ -38,5 +40,11 @@ public class BibliotecaTest {
         verify(mockOut).println(expected);
     }
 
+    @Test
+    public void testShowBookList() {
+        BibliotecaApp.main(new String[]{});
+        verify(mockOut).println(captor.capture());
+        final List<String> capturedArgument = captor.getAllValues();
+        assertThat(capturedArgument, hasItem("Art of War"));
     }
 }
