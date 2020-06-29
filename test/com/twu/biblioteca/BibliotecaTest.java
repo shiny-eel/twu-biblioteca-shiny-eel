@@ -10,7 +10,7 @@ import java.io.PrintStream;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class ExampleTest {
+public class BibliotecaTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
