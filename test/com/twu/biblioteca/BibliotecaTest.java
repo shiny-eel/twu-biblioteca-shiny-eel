@@ -12,6 +12,7 @@ import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.startsWith;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.atLeastOnce;
@@ -42,10 +43,22 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void testShowBookList() {
+    public void testShowBookTitle() {
         BibliotecaApp.main(new String[]{});
         verify(mockOut, atLeastOnce()).println(captor.capture());
         final List<String> capturedArgument = captor.getAllValues();
-        assertThat(capturedArgument, hasItem("Art of War"));
+        assertThat(capturedArgument, hasItem(startsWith("Art of War")));
+        assertThat(capturedArgument, hasItem(startsWith("Infinite Jest")));
+        assertThat(capturedArgument, hasItem(startsWith("David and Goliath")));
+    }
+
+    @Test
+    public void testShowBookTitleAuthorYear() {
+        BibliotecaApp.main(new String[]{});
+        verify(mockOut, atLeastOnce()).println(captor.capture());
+        final List<String> capturedArgument = captor.getAllValues();
+        assertThat(capturedArgument, hasItem("Art of War | Sun Tzu | 500"));
+        assertThat(capturedArgument, hasItem("Infinite Jest | David Foster Wallace | 1996"));
+        assertThat(capturedArgument, hasItem("David and Goliath | Malcolm Gladwell | 2013"));
     }
 }
