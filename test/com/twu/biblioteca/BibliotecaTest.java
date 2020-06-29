@@ -14,6 +14,7 @@ import java.util.List;
 
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -43,7 +44,7 @@ public class BibliotecaTest {
     @Test
     public void testShowBookList() {
         BibliotecaApp.main(new String[]{});
-        verify(mockOut).println(captor.capture());
+        verify(mockOut, atLeastOnce()).println(captor.capture());
         final List<String> capturedArgument = captor.getAllValues();
         assertThat(capturedArgument, hasItem("Art of War"));
     }
