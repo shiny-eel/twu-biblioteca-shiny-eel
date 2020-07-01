@@ -26,12 +26,15 @@ public class BibliotecaTest {
 
 
     private PrintStream mockOut;
-
+    private JSONReader mockReader;
+    private ArgumentCaptor<Book> bookArgumentCaptor = ArgumentCaptor.forClass(Book.class);
     private BlockingListener listener;
 
     @Before
     public void setUp() throws Exception {
         listener = new BlockingListener();
+        mockReader = mock(JSONReader.class);
+        when(mockReader.getBookList()).thenReturn(createFakeList());
 
         mockOut = mock(PrintStream.class);
         System.setOut(mockOut);
@@ -46,30 +49,36 @@ public class BibliotecaTest {
 
     @Test
     public void testShowBookTitle() throws InterruptedException {
-        JSONReader mockReader = mock(JSONReader.class);
-        when(mockReader.getBookList()).thenReturn(createFakeList());
         BibliotecaApp app = new BibliotecaApp();
         app.reader = mockReader;
         app.onReadEvent();
-        ArgumentCaptor<Book> captor = ArgumentCaptor.forClass(Book.class);
-        verify(mockOut, atLeastOnce()).println(captor.capture());
-        final List<Book> capturedArgument = captor.getAllValues();
+        verify(mockOut, atLeastOnce()).println(bookArgumentCaptor.capture());
+        final List<Book> capturedArgument = bookArgumentCaptor.getAllValues();
         assertThat(capturedArgument.get(0).title, is("Test Book"));
 
     }
 
     @Test
     public void testShowBookTitleAuthorYear() throws InterruptedException {
-        JSONReader mockReader = mock(JSONReader.class);
-        when(mockReader.getBookList()).thenReturn(createFakeList());
         BibliotecaApp app = new BibliotecaApp();
         app.reader = mockReader;
         app.onReadEvent();
-        ArgumentCaptor<Book> captor = ArgumentCaptor.forClass(Book.class);
-        verify(mockOut, atLeastOnce()).println(captor.capture());
-        final List<Book> capturedArgument = captor.getAllValues();
+        verify(mockOut, atLeastOnce()).println(bookArgumentCaptor.capture());
+        final List<Book> capturedArgument = bookArgumentCaptor.getAllValues();
         assertThat(capturedArgument.get(0).toString(), is("Test Book | Foo Bar | 999"));
     }
+
+
+    @Test
+    public void testMultipleBooksDisplay() throws InterruptedException {
+        BibliotecaApp app = new BibliotecaApp();
+        app.reader = mockReader;
+        app.onReadEvent();
+        verify(mockOut, atLeastOnce()).println(bookArgumentCaptor.capture());
+        final List<Book> capturedArgument = bookArgumentCaptor.getAllValues();
+        assertThat(capturedArgument.get(1).toString(), is("Another One | Rubber Ducky | 1"));
+    }
+
 
     private List<Book> createFakeList() {
         List<Book> li = new LinkedList<>();
@@ -77,6 +86,11 @@ public class BibliotecaTest {
         b.year = 999;
         b.title = "Test Book";
         b.author = "Foo Bar";
+        li.add(b);
+        b = new Book();
+        b.year = 1;
+        b.title = "Another One";
+        b.author = "Rubber Ducky";
         li.add(b);
         return li;
     }
