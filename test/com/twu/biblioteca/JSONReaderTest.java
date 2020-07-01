@@ -16,6 +16,7 @@ public class JSONReaderTest {
 
     }
 
+
     @Test
     public void testReadJSON() throws Exception {
         JSONReader reader = new JSONReader();
@@ -25,6 +26,18 @@ public class JSONReaderTest {
         assertThat(reader.bookList.get(0).title, is("Art of War"));
         assertThat(reader.bookList.get(1).title, is("Infinite Jest"));
         assertThat(reader.bookList.get(2).title, is("David and Goliath"));
+
+    }
+
+    @Test
+    public void testReadJSONDeep() throws Exception {
+        JSONReader reader = new JSONReader();
+        reader.addListener(listener);
+        reader.read("resources/book-list.json");
+        listener.waitForReader();
+        assertThat(reader.bookList.get(0).author, is("Sun Tzu"));
+        assertThat(reader.bookList.get(1).author, is("David Foster Wallace"));
+        assertThat(reader.bookList.get(2).author, is("Malcolm Gladwell"));
 
     }
 }
