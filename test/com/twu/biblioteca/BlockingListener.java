@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 public class BlockingListener implements ReaderListener {
 
@@ -12,6 +13,6 @@ public class BlockingListener implements ReaderListener {
     }
 
     public void waitForReader() throws InterruptedException {
-        latch.await();
+        latch.await(5, TimeUnit.SECONDS);
     }
 }

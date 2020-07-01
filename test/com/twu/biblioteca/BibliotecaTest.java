@@ -1,32 +1,38 @@
 package com.twu.biblioteca;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 import java.io.PrintStream;
+import java.util.LinkedList;
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 
 public class BibliotecaTest {
+    static final Logger logger = LogManager.getLogger(BibliotecaTest.class.getName());
+
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
-    @Captor
-    private ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 
     private PrintStream mockOut;
 
+    private BlockingListener listener;
+
     @Before
     public void setUp() throws Exception {
+        listener = new BlockingListener();
+
         mockOut = mock(PrintStream.class);
         System.setOut(mockOut);
     }
@@ -39,22 +45,39 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void testShowBookTitle() {
-        BibliotecaApp.main(new String[]{});
+    public void testShowBookTitle() throws InterruptedException {
+        JSONReader mockReader = mock(JSONReader.class);
+        when(mockReader.getBookList()).thenReturn(createFakeList());
+        BibliotecaApp app = new BibliotecaApp();
+        app.reader = mockReader;
+        app.onReadEvent();
+        ArgumentCaptor<Book> captor = ArgumentCaptor.forClass(Book.class);
         verify(mockOut, atLeastOnce()).println(captor.capture());
-        final List<String> capturedArgument = captor.getAllValues();
-        assertThat(capturedArgument, hasItem(startsWith("Art of War")));
-        assertThat(capturedArgument, hasItem(startsWith("Infinite Jest")));
-        assertThat(capturedArgument, hasItem(startsWith("David and Goliath")));
+        final List<Book> capturedArgument = captor.getAllValues();
+        assertThat(capturedArgument.get(0).title, is("Test Book"));
+
     }
 
     @Test
-    public void testShowBookTitleAuthorYear() {
-        BibliotecaApp.main(new String[]{});
-        verify(mockOut, atLeast(4)).println(captor.capture());
-        final List<String> capturedArgument = captor.getAllValues();
-        assertThat(capturedArgument, hasItem("Art of War | Sun Tzu | 500"));
-        assertThat(capturedArgument, hasItem("Infinite Jest | David Foster Wallace | 1996"));
-        assertThat(capturedArgument, hasItem("David and Goliath | Malcolm Gladwell | 2013"));
+    public void testShowBookTitleAuthorYear() throws InterruptedException {
+        JSONReader mockReader = mock(JSONReader.class);
+        when(mockReader.getBookList()).thenReturn(createFakeList());
+        BibliotecaApp app = new BibliotecaApp();
+        app.reader = mockReader;
+        app.onReadEvent();
+        ArgumentCaptor<Book> captor = ArgumentCaptor.forClass(Book.class);
+        verify(mockOut, atLeastOnce()).println(captor.capture());
+        final List<Book> capturedArgument = captor.getAllValues();
+        assertThat(capturedArgument.get(0).toString(), is("Test Book | Foo Bar | 999"));
+    }
+
+    private List<Book> createFakeList() {
+        List<Book> li = new LinkedList<>();
+        Book b = new Book();
+        b.year = 999;
+        b.title = "Test Book";
+        b.author = "Foo Bar";
+        li.add(b);
+        return li;
     }
 }
