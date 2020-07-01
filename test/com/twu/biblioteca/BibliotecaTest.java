@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Matchers;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
@@ -13,6 +14,7 @@ import java.io.PrintStream;
 import java.util.LinkedList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -27,7 +29,7 @@ public class BibliotecaTest {
 
     private PrintStream mockOut;
     private JSONReader mockReader;
-    private ArgumentCaptor<Book> bookArgumentCaptor = ArgumentCaptor.forClass(Book.class);
+    private ArgumentCaptor<Object> bookArgumentCaptor = ArgumentCaptor.forClass(Object.class);
     private BlockingListener listener;
 
     @Before
@@ -43,8 +45,20 @@ public class BibliotecaTest {
     @Test
     public void testWelcomeMessage() {
         BibliotecaApp.main(new String[]{});
-        String expected = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
+        String expected =
+                "Welcome to Biblioteca. " +
+                        "Your one-stop-shop for great book titles in Bangalore!";
         verify(mockOut).println(expected);
+    }
+
+    @Test
+    public void testMenu() {
+        BibliotecaApp.main(new String[]{});
+        String expected = "Select an option:";
+        verify(mockOut, atLeastOnce()).println(bookArgumentCaptor.capture());
+        final List<Object> capturedArgument = bookArgumentCaptor.getAllValues();
+        assertThat(capturedArgument.get(1).toString(), is(expected));
+
     }
 
     @Test
@@ -53,8 +67,8 @@ public class BibliotecaTest {
         app.reader = mockReader;
         app.onReadEvent();
         verify(mockOut, atLeastOnce()).println(bookArgumentCaptor.capture());
-        final List<Book> capturedArgument = bookArgumentCaptor.getAllValues();
-        assertThat(capturedArgument.get(0).title, is("Test Book"));
+        final List<Object> capturedArgument = bookArgumentCaptor.getAllValues();
+        assertThat(capturedArgument.get(0).toString(), startsWith("Test Book"));
 
     }
 
@@ -64,8 +78,9 @@ public class BibliotecaTest {
         app.reader = mockReader;
         app.onReadEvent();
         verify(mockOut, atLeastOnce()).println(bookArgumentCaptor.capture());
-        final List<Book> capturedArgument = bookArgumentCaptor.getAllValues();
-        assertThat(capturedArgument.get(0).toString(), is("Test Book | Foo Bar | 999"));
+        final List<Object> capturedArgument = bookArgumentCaptor.getAllValues();
+        assertThat(capturedArgument.get(0).toString(),
+                is("Test Book | Foo Bar | 999"));
     }
 
 
@@ -75,8 +90,9 @@ public class BibliotecaTest {
         app.reader = mockReader;
         app.onReadEvent();
         verify(mockOut, atLeastOnce()).println(bookArgumentCaptor.capture());
-        final List<Book> capturedArgument = bookArgumentCaptor.getAllValues();
-        assertThat(capturedArgument.get(1).toString(), is("Another One | Rubber Ducky | 1"));
+        final List<Object> capturedArgument = bookArgumentCaptor.getAllValues();
+        assertThat(capturedArgument.get(1).toString(),
+                is("Another One | Rubber Ducky | 1"));
     }
 
 
