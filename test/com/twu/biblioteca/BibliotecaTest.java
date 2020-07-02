@@ -52,11 +52,12 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void testMenu() {
+    public void testMenuPrompt() {
         BibliotecaApp.main(new String[]{});
         String expected = "Select an option:";
-        verify(mockOut, atLeastOnce()).println(bookArgumentCaptor.capture());
-        final List<Object> capturedArgument = bookArgumentCaptor.getAllValues();
+        ArgumentCaptor<String> cap = ArgumentCaptor.forClass(String.class);
+        verify(mockOut, atLeastOnce()).println(cap.capture());
+        final List<String> capturedArgument = cap.getAllValues();
         assertThat(capturedArgument.get(1).toString(), is(expected));
 
     }

@@ -1,10 +1,13 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.action.ActionManager;
+
 import java.util.List;
 
 public class BibliotecaApp implements ReaderListener {
 
     JSONReader reader;
+    ActionManager actionManager;
 
     public static void main(String[] args) {
         new BibliotecaApp().initialise();
@@ -13,6 +16,8 @@ public class BibliotecaApp implements ReaderListener {
     public void initialise() {
         System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
         requestBookList();
+        actionManager = new ActionManager(this);
+        actionManager.start();
     }
 
     private void requestBookList() {
@@ -31,6 +36,8 @@ public class BibliotecaApp implements ReaderListener {
 
     @Override
     public void onReadEvent() {
-        displayBookList(reader.getBookList());
+//        displayBookList(reader.getBookList());
+
+
     }
 }
