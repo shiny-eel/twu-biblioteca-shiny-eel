@@ -29,11 +29,9 @@ public class BibliotecaTest {
     private MockPrint mockOut;
     private BookFactory mockReader;
     private ArgumentCaptor<Object> bookArgumentCaptor = ArgumentCaptor.forClass(Object.class);
-    private BlockingListener listener;
 
     @Before
     public void setUp() throws Exception {
-        listener = new BlockingListener();
         mockReader = mock(BookFactory.class);
         when(mockReader.getBookList()).thenReturn(createFakeList());
 
@@ -104,15 +102,9 @@ public class BibliotecaTest {
 
     private List<Book> createFakeList() {
         List<Book> li = new LinkedList<>();
-        Book b = new Book();
-        b.year = 999;
-        b.title = "Test Book";
-        b.author = "Foo Bar";
+        Book b = new Book("Test Book", "Foo Bar", 999);
         li.add(b);
-        b = new Book();
-        b.year = 1;
-        b.title = "Another One";
-        b.author = "Rubber Ducky";
+        b = new Book("Another One", "Rubber Ducky", 1);
         li.add(b);
         return li;
     }
