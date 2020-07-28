@@ -3,6 +3,7 @@ package com.twu.biblioteca.action;
 import com.twu.biblioteca.BibliotecaApp;
 import com.twu.biblioteca.io.Printer;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class ActionManager {
@@ -17,15 +18,17 @@ public class ActionManager {
     }
 
     public void start() {
+        actions = new LinkedList<>();
+        actions.add(new ListBooksAction(app));
         displayMenu();
     }
 
 
     private void displayMenu() {
         p.println("Select an option:");
-//        for (Action action : actions) {
-//            System.out.println(ac);
-//        }
+        for (Action action : actions) {
+            p.println(action.getTitle());
+        }
     }
 
 
