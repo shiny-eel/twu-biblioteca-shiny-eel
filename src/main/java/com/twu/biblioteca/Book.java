@@ -6,18 +6,12 @@ public class Book {
     String author;
     int year;
 
-    // Needed for Jackson JSON unmarshalling
-    public void setTitle(String title) {
+    public Book(String title, String author, int year) {
         this.title = title;
-    }
-
-    public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public void setYear(int year) {
         this.year = year;
     }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

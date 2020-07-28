@@ -5,18 +5,18 @@ import com.twu.biblioteca.io.Printer;
 
 import java.util.List;
 
-public class BibliotecaApp implements ReaderListener {
+public class BibliotecaApp {
 
-    JSONReader reader;
-    ActionManager actionManager;
     protected Printer p;
-
-    public static void main(String[] args) {
-        new BibliotecaApp(Printer.get()).initialise();
-    }
+    BookFactory reader;
+    ActionManager actionManager;
 
     public BibliotecaApp(Printer p) {
         this.p = p;
+    }
+
+    public static void main(String[] args) {
+        new BibliotecaApp(Printer.get()).initialise();
     }
 
     public void initialise() {
@@ -28,10 +28,8 @@ public class BibliotecaApp implements ReaderListener {
 
 
     private void requestBookList() {
-        String path = "resources/book-list.json";
-        reader = new JSONReader(this);
-        reader.addListener(this);
-        reader.read(path);
+        reader = new BookFactory(this);
+        reader.createBooks();
 
     }
 
@@ -41,11 +39,4 @@ public class BibliotecaApp implements ReaderListener {
         }
     }
 
-
-    @Override
-    public void onReadEvent() {
-//        displayBookList(reader.getBookList());
-
-
-    }
 }

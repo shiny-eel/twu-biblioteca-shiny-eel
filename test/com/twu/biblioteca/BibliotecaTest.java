@@ -14,7 +14,6 @@ import org.mockito.junit.MockitoRule;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -28,14 +27,14 @@ public class BibliotecaTest {
 
 
     private MockPrint mockOut;
-    private JSONReader mockReader;
+    private BookFactory mockReader;
     private ArgumentCaptor<Object> bookArgumentCaptor = ArgumentCaptor.forClass(Object.class);
     private BlockingListener listener;
 
     @Before
     public void setUp() throws Exception {
         listener = new BlockingListener();
-        mockReader = mock(JSONReader.class);
+        mockReader = mock(BookFactory.class);
         when(mockReader.getBookList()).thenReturn(createFakeList());
 
         mockOut = new MockPrint();

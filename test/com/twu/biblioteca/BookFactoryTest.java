@@ -7,7 +7,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
-public class JSONReaderTest {
+public class BookFactoryTest {
 
     private BlockingListener listener;
     private BibliotecaApp mockApp;
@@ -22,7 +22,7 @@ public class JSONReaderTest {
 
     @Test
     public void testReadJSON() throws Exception {
-        JSONReader reader = new JSONReader(mockApp);
+        BookFactory reader = new BookFactory(mockApp);
         reader.addListener(listener);
         reader.read("resources/book-list.json");
         listener.waitForReader();
@@ -34,7 +34,7 @@ public class JSONReaderTest {
 
     @Test
     public void testReadJSONDeep() throws Exception {
-        JSONReader reader = new JSONReader(mockApp);
+        BookFactory reader = new BookFactory(mockApp);
         reader.addListener(listener);
         reader.read("resources/book-list.json");
         listener.waitForReader();
