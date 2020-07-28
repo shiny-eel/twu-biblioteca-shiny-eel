@@ -64,7 +64,20 @@ public class BibliotecaTest {
         BibliotecaApp mockApp = mock(BibliotecaApp.class);
         ActionManager am = new ActionManager(mockApp, mockOut);
         am.start();
-        assertThat(mockOut.output.get(1), is("1. List of books"));
+        assertThat(mockOut.getLast(), is("1. List of books"));
+    }
+
+    @Test
+    public void testSelectListBooks() {
+        BibliotecaApp mockApp = mock(BibliotecaApp.class);
+//        when(mockApp.re()).thenReturn(createFakeList());
+
+        ActionManager am = new ActionManager(mockApp, mockOut);
+        am.start();
+        giveInput("1\n");
+        assertThat(mockOut.getLast(), is("Art of War | Sun Tzu | 500\n" +
+                "Infinite Jest | David Foster Wallace | 1996\n" +
+                "David and Goliath | Malcolm Gladwell | 2013"));
     }
 
     private void giveInput(String in){
