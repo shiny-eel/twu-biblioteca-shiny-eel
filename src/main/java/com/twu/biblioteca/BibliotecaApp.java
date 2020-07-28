@@ -1,22 +1,22 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.action.ActionManager;
-import com.twu.biblioteca.io.Printer;
+import com.twu.biblioteca.io.IO;
 
 import java.util.List;
 
 public class BibliotecaApp {
 
-    protected Printer p;
+    protected IO p;
     BookFactory reader;
     ActionManager actionManager;
 
-    public BibliotecaApp(Printer p) {
+    public BibliotecaApp(IO p) {
         this.p = p;
     }
 
     public static void main(String[] args) {
-        new BibliotecaApp(Printer.get()).initialise();
+        new BibliotecaApp(IO.get()).initialise();
     }
 
     public void initialise() {

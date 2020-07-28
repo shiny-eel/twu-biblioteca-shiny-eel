@@ -1,18 +1,13 @@
 package com.twu.biblioteca.io;
 
-import com.twu.biblioteca.io.Printer;
-
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MockPrint extends Printer {
+public class MockIO extends IO {
 
     public List<String> output = new LinkedList<>();
 
-    public MockPrint() {
+    public MockIO() {
         super();
     }
 
