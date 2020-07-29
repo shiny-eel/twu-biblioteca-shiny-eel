@@ -43,7 +43,6 @@ public class BibliotecaTest {
     @Test
     public void testWelcomeMessage() {
         BibliotecaApp app = new BibliotecaApp(mockOut);
-        giveInput("1\n");
         app.initialise();
         String expected =
                 "Welcome to Biblioteca. " +
@@ -55,7 +54,6 @@ public class BibliotecaTest {
     public void testMenuPrompt() {
         BibliotecaApp app = new BibliotecaApp(mockOut);
         app.initialise();
-        giveInput("\n");
         String expected = "Select an option:";
         assertThat(mockOut.get(1).toString(), is(expected));
 
@@ -89,10 +87,6 @@ public class BibliotecaTest {
      "David and Goliath | Malcolm Gladwell | 2013"));
      *
      */
-    private void giveInput(String in){
-        testIn = new ByteArrayInputStream(in.getBytes());
-        System.setIn(testIn);
-    }
 
     private List<Book> createFakeList() {
         List<Book> li = new LinkedList<>();

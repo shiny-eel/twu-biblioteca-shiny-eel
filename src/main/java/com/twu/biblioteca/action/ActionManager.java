@@ -22,7 +22,12 @@ public class ActionManager {
         actions.add(new ListBooksAction(app, io));
         displayMenu();
         String in = io.getInput();
-        int id = Integer.parseInt(in);
+        int id;
+        try {
+            id = Integer.parseInt(in);
+        } catch (NumberFormatException e) {
+            return;
+        }
         for (Action action : actions) {
             if (action.matches(id)) {
                 action.execute();
