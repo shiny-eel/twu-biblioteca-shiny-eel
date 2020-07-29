@@ -28,72 +28,31 @@ public class BibliotecaTest {
 
     private ByteArrayInputStream testIn;
 
-    private MockIO mockOut;
-    private BookFactory mockReader;
-    private ArgumentCaptor<Object> bookArgumentCaptor = ArgumentCaptor.forClass(Object.class);
+    private MockIO mockIO;
 
     @Before
     public void setUp() throws Exception {
-        mockReader = mock(BookFactory.class);
-        when(mockReader.getBookList()).thenReturn(createFakeList());
-
-        mockOut = new MockIO();
+        mockIO = new MockIO();
     }
 
     @Test
     public void testWelcomeMessage() {
-        BibliotecaApp app = new BibliotecaApp(mockOut);
+        BibliotecaApp app = new BibliotecaApp(mockIO);
         app.initialise();
         String expected =
                 "Welcome to Biblioteca. " +
                         "Your one-stop-shop for great book titles in Bangalore!";
-        assertThat(mockOut.get(0), is(expected));
+        assertThat(mockIO.get(0), is(expected));
     }
 
     @Test
     public void testMenuPrompt() {
-        BibliotecaApp app = new BibliotecaApp(mockOut);
+        BibliotecaApp app = new BibliotecaApp(mockIO);
         app.initialise();
         String expected = "Select an option:";
-        assertThat(mockOut.get(1).toString(), is(expected));
+        assertThat(mockIO.get(1).toString(), is(expected));
 
     }
 
-    @Test
-    public void testMenuDisplayOption() {
-        BibliotecaApp mockApp = mock(BibliotecaApp.class);
-        ActionManager am = new ActionManager(mockApp, mockOut);
-        when(mockApp.getBookList()).thenReturn(createFakeList());
-        am.start();
-        assertThat(mockOut.getLast(), is("1. List of books"));
-    }
 
-    @Test
-    public void testSelectListBooks() {
-        BibliotecaApp mockApp = mock(BibliotecaApp.class);
-        when(mockApp.getBookList()).thenReturn(createFakeList());
-
-        ActionManager am = new ActionManager(mockApp, mockOut);
-        mockOut.addInput("1");
-        am.start();
-        assertThat(mockOut.get(2), is("Test Book | Foo Bar | 999"));
-        assertThat(mockOut.getLast(), is("Another One | Rubber Ducky | 1"));
-    }
-
-    /**
-     * May be needed in future
-     *  assertThat(mockOut.getLast(), is("Art of War | Sun Tzu | 500\n" +
-     "Infinite Jest | David Foster Wallace | 1996\n" +
-     "David and Goliath | Malcolm Gladwell | 2013"));
-     *
-     */
-
-    private List<Book> createFakeList() {
-        List<Book> li = new LinkedList<>();
-        Book b = new Book("Test Book", "Foo Bar", 999);
-        li.add(b);
-        b = new Book("Another One", "Rubber Ducky", 1);
-        li.add(b);
-        return li;
-    }
 }
