@@ -22,9 +22,9 @@ public class BookFactoryTest {
     public void testReadJSON() throws Exception {
         BookFactory reader = new BookFactory(mockApp);
         reader.createBooks();
-        assertThat(reader.bookList.get(0).title, is("Art of War"));
-        assertThat(reader.bookList.get(1).title, is("Infinite Jest"));
-        assertThat(reader.bookList.get(2).title, is("David and Goliath"));
+        assertThat(reader.getBookList().get(0).title, is("Art of War"));
+        assertThat(reader.getBookList().get(1).title, is("Infinite Jest"));
+        assertThat(reader.getBookList().get(2).title, is("David and Goliath"));
 
     }
 
@@ -32,9 +32,9 @@ public class BookFactoryTest {
     public void testReadJSONDeep() throws Exception {
         BookFactory reader = new BookFactory(mockApp);
         reader.createBooks();
-        assertThat(reader.bookList.get(0).author, is("Sun Tzu"));
-        assertThat(reader.bookList.get(1).author, is("David Foster Wallace"));
-        assertThat(reader.bookList.get(2).author, is("Malcolm Gladwell"));
+        assertThat(reader.getBookList().get(0).author, is("Sun Tzu"));
+        assertThat(reader.getBookList().get(1).author, is("David Foster Wallace"));
+        assertThat(reader.getBookList().get(2).author, is("Malcolm Gladwell"));
 
     }
 }

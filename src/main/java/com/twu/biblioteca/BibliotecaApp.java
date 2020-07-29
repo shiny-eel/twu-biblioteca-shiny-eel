@@ -33,10 +33,9 @@ public class BibliotecaApp {
 
     }
 
-    private void displayBookList(List<Book> books) {
-        for (Book book : books) {
-            System.out.println(book);
-        }
+    public List<Book> getBookList() {
+        return reader.getBookList();
     }
+
 
 }

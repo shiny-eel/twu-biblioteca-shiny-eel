@@ -43,6 +43,7 @@ public class BibliotecaTest {
     @Test
     public void testWelcomeMessage() {
         BibliotecaApp app = new BibliotecaApp(mockOut);
+        giveInput("1\n");
         app.initialise();
         String expected =
                 "Welcome to Biblioteca. " +
@@ -54,6 +55,7 @@ public class BibliotecaTest {
     public void testMenuPrompt() {
         BibliotecaApp app = new BibliotecaApp(mockOut);
         app.initialise();
+        giveInput("\n");
         String expected = "Select an option:";
         assertThat(mockOut.get(1).toString(), is(expected));
 
@@ -63,6 +65,7 @@ public class BibliotecaTest {
     public void testMenuDisplayOption() {
         BibliotecaApp mockApp = mock(BibliotecaApp.class);
         ActionManager am = new ActionManager(mockApp, mockOut);
+        when(mockApp.getBookList()).thenReturn(createFakeList());
         am.start();
         assertThat(mockOut.getLast(), is("1. List of books"));
     }
@@ -70,16 +73,22 @@ public class BibliotecaTest {
     @Test
     public void testSelectListBooks() {
         BibliotecaApp mockApp = mock(BibliotecaApp.class);
-//        when(mockApp.re()).thenReturn(createFakeList());
+        when(mockApp.getBookList()).thenReturn(createFakeList());
 
         ActionManager am = new ActionManager(mockApp, mockOut);
+        mockOut.addInput("1");
         am.start();
-        giveInput("1\n");
-        assertThat(mockOut.getLast(), is("Art of War | Sun Tzu | 500\n" +
-                "Infinite Jest | David Foster Wallace | 1996\n" +
-                "David and Goliath | Malcolm Gladwell | 2013"));
+        assertThat(mockOut.get(2), is("Test Book | Foo Bar | 999"));
+        assertThat(mockOut.getLast(), is("Another One | Rubber Ducky | 1"));
     }
 
+    /**
+     * May be needed in future
+     *  assertThat(mockOut.getLast(), is("Art of War | Sun Tzu | 500\n" +
+     "Infinite Jest | David Foster Wallace | 1996\n" +
+     "David and Goliath | Malcolm Gladwell | 2013"));
+     *
+     */
     private void giveInput(String in){
         testIn = new ByteArrayInputStream(in.getBytes());
         System.setIn(testIn);
