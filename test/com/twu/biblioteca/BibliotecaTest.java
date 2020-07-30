@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.action.ActionManager;
 import com.twu.biblioteca.io.MockIO;
+import com.twu.biblioteca.io.NoInputGivenException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
@@ -38,7 +39,9 @@ public class BibliotecaTest {
     @Test
     public void testWelcomeMessage() {
         BibliotecaApp app = new BibliotecaApp(mockIO);
-        app.initialise();
+        try {
+            app.initialise();
+        } catch (NoInputGivenException e) {}
         String expected =
                 "Welcome to Biblioteca. " +
                         "Your one-stop-shop for great book titles in Bangalore!";
@@ -48,7 +51,9 @@ public class BibliotecaTest {
     @Test
     public void testMenuPrompt() {
         BibliotecaApp app = new BibliotecaApp(mockIO);
-        app.initialise();
+        try {
+            app.initialise();
+        } catch (NoInputGivenException e) {}
         String expected = "Select an option:";
         assertThat(mockIO.get(1).toString(), is(expected));
 

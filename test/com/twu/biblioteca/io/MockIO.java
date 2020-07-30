@@ -19,6 +19,8 @@ public class MockIO extends IO {
 
     @Override
     public String getInput() {
+        if (input.size() < 1)
+            throw(new NoInputGivenException());
         return input.pollFirst();
     }
 

@@ -7,7 +7,6 @@ public abstract class Action {
 
     protected BibliotecaApp app;
     protected IO io;
-    protected int id;
 
     public Action(BibliotecaApp app, IO io) {
         this.app = app;
@@ -15,13 +14,6 @@ public abstract class Action {
 
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public boolean matches(int id) {
-        return (this.id == id);
-    }
 
     abstract String getTitle();
 
