@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.util.LinkedList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -35,8 +36,8 @@ public class ActionManagerTest {
     @Test
     public void testMenuDisplayOptions() {
         startActionManager();
-        assertThat(mockIO.get(1), is("1. List of books"));
-        assertThat(mockIO.getLast(), is("2. Quit"));
+        String expected = "1. List of books\n" + "2. Quit";
+        assertThat(mockIO.fullOutput, containsString(expected));
     }
 
 
@@ -44,8 +45,8 @@ public class ActionManagerTest {
     public void testSelectListBooks() {
         mockIO.addInput("1");
         startActionManager();
-        assertThat(mockIO.get(3), is("Test Book | Foo Bar | 999"));
-        assertThat(mockIO.get(4), is("Another One | Rubber Ducky | 1"));
+        String expected = "Test Book | Foo Bar | 999\n" + "Another One | Rubber Ducky | 1";
+        assertThat(mockIO.fullOutput, containsString(expected));
     }
 
     @Test
@@ -53,14 +54,13 @@ public class ActionManagerTest {
         mockIO.addInput("0");
         startActionManager();
         String invalid = "Please select a valid option!";
-        assertThat(mockIO.get(3), is(invalid));
+        assertThat(mockIO.fullOutput, containsString(invalid));
 
     }
 
     @Test
     public void testQuitOptionSelect() {
-//        mockIO.addInput("");
-        mockIO.addInput("2");
+        mockIO.addInput("2"); // Assuming 2 is the quit option
         startActionManager();
         verify(mockApp).quit();
     }

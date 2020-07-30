@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
@@ -16,9 +17,10 @@ import java.io.ByteArrayInputStream;
 import java.util.LinkedList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
 
 public class BibliotecaTest {
     static final Logger logger = LogManager.getLogger(BibliotecaTest.class.getName());
@@ -45,7 +47,7 @@ public class BibliotecaTest {
         String expected =
                 "Welcome to Biblioteca. " +
                         "Your one-stop-shop for great book titles in Bangalore!";
-        assertThat(mockIO.get(0), is(expected));
+        assertThat(mockIO.fullOutput, startsWith(expected));
     }
 
     @Test
@@ -55,7 +57,7 @@ public class BibliotecaTest {
             app.initialise();
         } catch (NoInputGivenException e) {}
         String expected = "Select an option:";
-        assertThat(mockIO.get(1).toString(), is(expected));
+        assertThat(mockIO.fullOutput, containsString(expected));
 
     }
 
