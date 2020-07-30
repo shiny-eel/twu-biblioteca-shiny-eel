@@ -16,6 +16,6 @@ public class QuitAction extends Action {
 
     @Override
     void execute() {
-//        System.exit(0);
+        app.quit();
     }
 }

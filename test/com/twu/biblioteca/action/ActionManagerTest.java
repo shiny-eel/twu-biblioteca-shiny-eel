@@ -5,6 +5,7 @@ import com.twu.biblioteca.Book;
 import com.twu.biblioteca.io.MockIO;
 import com.twu.biblioteca.io.NoInputGivenException;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.LinkedList;
@@ -13,16 +14,20 @@ import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ActionManagerTest {
     private MockIO mockIO;
     private ActionManager am;
+    private BibliotecaApp mockApp;
+
+
 
     @Before
     public void setUp() throws Exception {
         mockIO = new MockIO();
-        BibliotecaApp mockApp = mock(BibliotecaApp.class);
+        mockApp = mock(BibliotecaApp.class);
         when(mockApp.getBookList()).thenReturn(createFakeList());
         am = new ActionManager(mockApp, mockIO);
     }
@@ -55,6 +60,9 @@ public class ActionManagerTest {
     @Test
     public void testQuitOptionSelect() {
 //        mockIO.addInput("");
+        mockIO.addInput("2");
+        startActionManager();
+        verify(mockApp).quit();
     }
 
     /**

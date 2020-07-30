@@ -38,4 +38,8 @@ public class BibliotecaApp {
     }
 
 
+    public void quit() {
+        System.exit(0);
+    }
+
 }
