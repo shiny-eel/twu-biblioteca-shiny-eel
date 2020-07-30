@@ -27,6 +27,9 @@ public class MockIO extends IO {
     public String getLast() {
         return output.get(output.size() - 1);
     }
+    public String getLast(int i) {
+        return output.get(output.size() - 1 - i);
+    }
     public String get(int i) { return output.get(i); }
 
     @Override

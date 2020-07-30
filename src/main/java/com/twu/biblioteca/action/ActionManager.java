@@ -12,7 +12,7 @@ public class ActionManager {
 
     private BibliotecaApp app;
     private IO io;
-    private Map<Integer, Action> actions;
+    private Map<Integer, Action> actions = new HashMap<>();
     private static final String INVALID_PROMPT = "Please select a valid option!";
 
     public ActionManager(BibliotecaApp app, IO io) {
@@ -21,9 +21,7 @@ public class ActionManager {
     }
 
     public void start() {
-        actions = new HashMap<>();
-
-        actions.put(1, new ListBooksAction(app, io));
+        createActions();
         while (true) {
 
             displayMenu();
@@ -38,7 +36,12 @@ public class ActionManager {
                 actions.get(id).execute();
 
         }
+    }
 
+    private void createActions() {
+
+        actions.put(1, new ListBooksAction(app, io));
+        actions.put(2, new QuitAction(app, io));
 
     }
 

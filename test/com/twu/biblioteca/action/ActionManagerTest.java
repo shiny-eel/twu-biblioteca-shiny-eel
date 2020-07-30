@@ -28,17 +28,19 @@ public class ActionManagerTest {
     }
 
     @Test
-    public void testMenuDisplayOption() {
+    public void testMenuDisplayOptions() {
         startActionManager();
-        assertThat(mockIO.getLast(), is("1. List of books"));
+        assertThat(mockIO.get(1), is("1. List of books"));
+        assertThat(mockIO.getLast(), is("2. Quit"));
     }
+
 
     @Test
     public void testSelectListBooks() {
         mockIO.addInput("1");
         startActionManager();
-        assertThat(mockIO.get(2), is("Test Book | Foo Bar | 999"));
-        assertThat(mockIO.get(3), is("Another One | Rubber Ducky | 1"));
+        assertThat(mockIO.get(3), is("Test Book | Foo Bar | 999"));
+        assertThat(mockIO.get(4), is("Another One | Rubber Ducky | 1"));
     }
 
     @Test
@@ -46,8 +48,13 @@ public class ActionManagerTest {
         mockIO.addInput("0");
         startActionManager();
         String invalid = "Please select a valid option!";
-        assertThat(mockIO.get(2), is(invalid));
+        assertThat(mockIO.get(3), is(invalid));
 
+    }
+
+    @Test
+    public void testQuitOptionSelect() {
+//        mockIO.addInput("");
     }
 
     /**
