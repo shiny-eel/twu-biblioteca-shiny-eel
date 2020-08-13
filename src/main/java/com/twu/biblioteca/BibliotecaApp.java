@@ -7,22 +7,18 @@ import java.util.List;
 
 public class BibliotecaApp {
 
-    protected IO p;
+    protected IO io;
     BookFactory reader;
     ActionManager actionManager;
 
-    public BibliotecaApp(IO p) {
-        this.p = p;
-    }
-
-    public static void main(String[] args) {
-        new BibliotecaApp(IO.get()).initialise();
+    public BibliotecaApp(IO io) {
+        this.io = io;
     }
 
     public void initialise() {
-        p.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
+        io.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
         requestBookList();
-        actionManager = new ActionManager(this, p);
+        actionManager = new ActionManager(this, io);
         actionManager.start();
     }
 

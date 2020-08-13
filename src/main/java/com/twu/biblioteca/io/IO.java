@@ -1,22 +1,20 @@
 package com.twu.biblioteca.io;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class IO {
     Scanner in;
+    PrintStream out;
 
-    private static IO singleton = new IO();
-
-    protected IO() {
-        in = new Scanner(System.in);
-    }
-
-    public static IO get() {
-        return singleton;
+    public IO(InputStream inputStream, PrintStream outStream) {
+        in = new Scanner(inputStream);
+        out = outStream;
     }
 
     public void println(String s) {
-        System.out.println(s);
+        out.println(s);
     }
 
     public String getInput() {
