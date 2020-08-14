@@ -2,6 +2,7 @@ package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.BibliotecaApp;
 import com.twu.biblioteca.Book;
+import com.twu.biblioteca.BookFactoryTest;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
 import org.junit.Before;
@@ -28,7 +29,7 @@ public class ActionManagerTest {
     @Before
     public void setUp() throws Exception {
         mockApp = mock(BibliotecaApp.class);
-        when(mockApp.getBookList()).thenReturn(createFakeList());
+        when(mockApp.getBookList()).thenReturn(BookFactoryTest.createFakeList());
     }
 
     public void start(String input) {
@@ -76,13 +77,6 @@ public class ActionManagerTest {
      * "David and Goliath | Malcolm Gladwell | 2013"));
      */
 
-    private List<Book> createFakeList() {
-        List<Book> li = new LinkedList<>();
-        Book b = new Book("Test Book", "Foo Bar", 999);
-        li.add(b);
-        b = new Book("Another One", "Rubber Ducky", 1);
-        li.add(b);
-        return li;
-    }
+
 
 }
