@@ -20,40 +20,29 @@ public class ActionManager {
 
     public void start() {
         createActions();
-        while (true) {
+        while (true) { // Infinite loop for CLI menu
 
             displayMenu();
+            String input = io.getInput();
             int id;
+
             try {
-                id = getUserSelection();
-            } catch (InvalidOptionException e) {
+                id = Integer.parseInt(input);
+            } catch (NumberFormatException e) { // Not a number
                 io.println(INVALID_PROMPT);
                 continue;
             }
-            if (actions.containsKey(id))
+            if (actions.containsKey(id)) {
                 actions.get(id).execute();
-
+            } else { // A number but not a valid option
+                io.println(INVALID_PROMPT);
+            }
         }
     }
 
     private void createActions() {
-
         actions.put(1, new ListBooksAction(lib, io));
         actions.put(2, new QuitAction(lib, io));
-
-    }
-
-    private int getUserSelection() throws InvalidOptionException {
-        String in = io.getInput();
-        int id;
-        try {
-            id = Integer.parseInt(in);
-            if (!actions.containsKey(id))
-                throw new InvalidOptionException();
-        } catch (NumberFormatException e) {
-            throw new InvalidOptionException();
-        }
-        return id;
     }
 
     private void displayMenu() {
