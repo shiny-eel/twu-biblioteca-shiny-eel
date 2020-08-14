@@ -13,6 +13,10 @@ public class IOHarness {
         return new IO(is, new PrintStream(os));
     }
 
+    public void clearOutput() {
+        os.reset();
+    }
+
     public String getOutput() {
         return os.toString();
     }

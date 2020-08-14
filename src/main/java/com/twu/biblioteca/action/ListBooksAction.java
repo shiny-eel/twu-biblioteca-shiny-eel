@@ -22,7 +22,8 @@ public class ListBooksAction extends Action {
     void execute() {
         List<Book> books = lib.getBookList();
         for (Book book : books) {
-            io.println(book.toString());
+            if (book.isAvailable())
+                io.println(book.toString());
         }
     }
 

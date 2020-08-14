@@ -8,7 +8,7 @@ import java.util.List;
 public class BibliotecaApp extends Library {
 
     protected IO io;
-    BookFactory reader;
+    BookFactory bookFactory;
     ActionManager actionManager;
 
     public BibliotecaApp(IO io) {
@@ -23,15 +23,26 @@ public class BibliotecaApp extends Library {
     }
 
     private void requestBookList() {
-        reader = new BookFactory(this);
-        reader.createBooks();
+        bookFactory = new BookFactory(this);
+        bookFactory.createBooks();
 
     }
 
     @Override
     public List<Book> getBookList() {
-        if (reader == null) requestBookList();
-        return reader.getBookList();
+        if (bookFactory == null) requestBookList();
+        return bookFactory.getBookList();
+    }
+
+    @Override
+    public void checkoutBook(String bookTitle) {
+        for (Book book : getBookList()) {
+            if (bookTitle.matches(book.title)) {
+                if (book.isAvailable) {
+                    book.isAvailable = false;
+                }
+            }
+        }
     }
 
 
