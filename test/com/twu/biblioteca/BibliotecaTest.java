@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.io.IO;
+import com.twu.biblioteca.io.IOHarness;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
@@ -26,19 +27,12 @@ public class BibliotecaTest {
     public MockitoRule rule = MockitoJUnit.rule();
 
     private ByteArrayInputStream testIn;
-
+    private IOHarness ioHarness = new IOHarness();
     private ByteArrayInputStream is;
-    private OutputStream out;
 
-
-    @Before
-    public void setUp() throws Exception {
-        out = new ByteArrayOutputStream();
-    }
 
     public void start(String input) {
-        is = new ByteArrayInputStream(input.getBytes());
-        IO mockIO = new IO(is, new PrintStream(out));
+        IO mockIO = ioHarness.createTestIO(input);
         BibliotecaApp app = new BibliotecaApp(mockIO);
         try {
             app.initialise();
@@ -52,14 +46,14 @@ public class BibliotecaTest {
         String expected =
                 "Welcome to Biblioteca. " +
                         "Your one-stop-shop for great book titles in Bangalore!";
-        assertThat(out.toString(), startsWith(expected));
+        assertThat(ioHarness.getOutput(), startsWith(expected));
     }
 
     @Test
     public void testMenuPrompt() {
         start("");
         String expected = "Select an option:";
-        assertThat(out.toString(), containsString(expected));
+        assertThat(ioHarness.getOutput(), containsString(expected));
 
     }
 

@@ -1,23 +1,21 @@
 package com.twu.biblioteca.action;
 
-import com.twu.biblioteca.BibliotecaApp;
+import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 public class ActionManager {
 
-    private BibliotecaApp app;
+    private Library lib;
     private IO io;
     private Map<Integer, Action> actions = new HashMap<>();
     private static final String INVALID_PROMPT = "Please select a valid option!";
 
-    public ActionManager(BibliotecaApp app, IO io) {
+    public ActionManager(Library lib, IO io) {
         this.io = io;
-        this.app = app;
+        this.lib = lib;
     }
 
     public void start() {
@@ -40,8 +38,8 @@ public class ActionManager {
 
     private void createActions() {
 
-        actions.put(1, new ListBooksAction(app, io));
-        actions.put(2, new QuitAction(app, io));
+        actions.put(1, new ListBooksAction(lib, io));
+        actions.put(2, new QuitAction(lib, io));
 
     }
 

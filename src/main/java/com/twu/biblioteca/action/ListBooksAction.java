@@ -2,14 +2,15 @@ package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.BibliotecaApp;
 import com.twu.biblioteca.Book;
+import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
 
 import java.util.List;
 
 public class ListBooksAction extends Action {
 
-    public ListBooksAction(BibliotecaApp app, IO io) {
-        super(app, io);
+    public ListBooksAction(Library lib, IO io) {
+        super(lib, io);
     }
 
     @Override
@@ -19,7 +20,7 @@ public class ListBooksAction extends Action {
 
     @Override
     void execute() {
-        List<Book> books = app.getBookList();
+        List<Book> books = lib.getBookList();
         for (Book book : books) {
             io.println(book.toString());
         }

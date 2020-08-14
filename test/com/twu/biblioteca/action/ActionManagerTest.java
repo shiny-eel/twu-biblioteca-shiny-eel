@@ -3,6 +3,7 @@ package com.twu.biblioteca.action;
 import com.twu.biblioteca.BibliotecaApp;
 import com.twu.biblioteca.Book;
 import com.twu.biblioteca.io.IO;
+import com.twu.biblioteca.io.IOHarness;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,18 +23,16 @@ public class ActionManagerTest {
     private ActionManager am;
     private BibliotecaApp mockApp;
     private ByteArrayInputStream is;
-    private OutputStream out;
+    private IOHarness ioHarness = new IOHarness();
 
     @Before
     public void setUp() throws Exception {
-        out = new ByteArrayOutputStream();
         mockApp = mock(BibliotecaApp.class);
         when(mockApp.getBookList()).thenReturn(createFakeList());
     }
 
     public void start(String input) {
-        is = new ByteArrayInputStream(input.getBytes());
-        IO mockIO = new IO(is, new PrintStream(out));
+        IO mockIO = ioHarness.createTestIO(input);
         am = new ActionManager(mockApp, mockIO);
         try {
             am.start();
@@ -45,7 +44,7 @@ public class ActionManagerTest {
     public void testMenuDisplayOptions() {
         start("");
         String expected = "1. List of books\n" + "2. Quit";
-        assertThat(out.toString(), containsString(expected));
+        assertThat(ioHarness.getOutput(), containsString(expected));
     }
 
 
@@ -53,14 +52,14 @@ public class ActionManagerTest {
     public void testSelectListBooks() {
         start("1");
         String expected = "Test Book | Foo Bar | 999\n" + "Another One | Rubber Ducky | 1";
-        assertThat(out.toString(), containsString(expected));
+        assertThat(ioHarness.getOutput(), containsString(expected));
     }
 
     @Test
     public void testInvalidOptionSelect() {
         start("0");
         String invalid = "Please select a valid option!";
-        assertThat(out.toString(), containsString(invalid));
+        assertThat(ioHarness.getOutput(), containsString(invalid));
 
     }
 

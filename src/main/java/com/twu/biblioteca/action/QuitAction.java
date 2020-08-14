@@ -1,13 +1,15 @@
 package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.BibliotecaApp;
+import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
 
 public class QuitAction extends Action {
 
-    public QuitAction(BibliotecaApp app, IO io) {
-        super(app, io);
+    public QuitAction(Library lib, IO io) {
+        super(lib, io);
     }
+
 
     @Override
     String getTitle() {
@@ -16,6 +18,6 @@ public class QuitAction extends Action {
 
     @Override
     void execute() {
-        app.quit();
+        lib.quit();
     }
 }

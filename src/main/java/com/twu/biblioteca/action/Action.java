@@ -1,15 +1,16 @@
 package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.BibliotecaApp;
+import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
 
 public abstract class Action {
 
-    protected BibliotecaApp app;
+    protected Library lib;
     protected IO io;
 
-    public Action(BibliotecaApp app, IO io) {
-        this.app = app;
+    public Action(Library lib, IO io) {
+        this.lib = lib;
         this.io = io;
 
     }

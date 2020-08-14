@@ -5,7 +5,7 @@ import com.twu.biblioteca.io.IO;
 
 import java.util.List;
 
-public class BibliotecaApp {
+public class BibliotecaApp extends Library {
 
     protected IO io;
     BookFactory reader;
@@ -22,20 +22,17 @@ public class BibliotecaApp {
         actionManager.start();
     }
 
-
     private void requestBookList() {
         reader = new BookFactory(this);
         reader.createBooks();
 
     }
 
+    @Override
     public List<Book> getBookList() {
+        if (reader == null) requestBookList();
         return reader.getBookList();
     }
 
-
-    public void quit() {
-        System.exit(0);
-    }
 
 }
