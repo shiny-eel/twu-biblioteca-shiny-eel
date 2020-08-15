@@ -4,6 +4,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+/**
+ * For creating a test environment in which an IO object can have
+ * - input injected by unit tests
+ * - output read by unit tests
+ */
 public class IOHarness {
     ByteArrayOutputStream os;
 
