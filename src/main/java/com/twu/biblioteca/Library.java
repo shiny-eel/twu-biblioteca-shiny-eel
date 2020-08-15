@@ -13,7 +13,7 @@ public abstract class Library {
 
 
 
-    public abstract void checkoutBook(String bookTitle);
+    public abstract boolean checkoutBook(String bookTitle);
 
     public void quit() { System.exit(0);}
 }

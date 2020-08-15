@@ -9,6 +9,8 @@ import java.util.List;
 
 public class ListBooksAction extends Action {
 
+    private static final String SEPARATOR = "--------------------";
+
     public ListBooksAction(Library lib, IO io) {
         super(lib, io);
     }
@@ -21,10 +23,12 @@ public class ListBooksAction extends Action {
     @Override
     void execute() {
         List<Book> books = lib.getBookList();
+        io.println(SEPARATOR);
         for (Book book : books) {
             if (book.isAvailable())
                 io.println(book.toString());
         }
+        io.println(SEPARATOR);
     }
 
 }

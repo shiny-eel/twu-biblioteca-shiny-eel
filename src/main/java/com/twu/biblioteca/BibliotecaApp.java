@@ -35,14 +35,16 @@ public class BibliotecaApp extends Library {
     }
 
     @Override
-    public void checkoutBook(String bookTitle) {
+    public boolean checkoutBook(String bookTitle) {
         for (Book book : getBookList()) {
             if (bookTitle.matches(book.title)) {
                 if (book.isAvailable) {
                     book.isAvailable = false;
+                    return true;
                 }
             }
         }
+        return false;
     }
 
 

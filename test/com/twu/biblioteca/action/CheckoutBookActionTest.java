@@ -6,9 +6,12 @@ import com.twu.biblioteca.BookFactoryTest;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.containsString;
@@ -20,6 +23,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class CheckoutBookActionTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void TestBookCheckoutTest() {
@@ -60,5 +66,29 @@ public class CheckoutBookActionTest {
         listAction.execute();
         assertThat(harness.getOutput(), not(containsString("Art of War | Sun Tzu | 500")));
 
+    }
+
+
+    @Test
+    public void successMessageTest() {
+        IOHarness harness = new IOHarness();
+        IO io = harness.createTestIO("Art of War");
+        BibliotecaApp app = new BibliotecaApp(io);
+        CheckoutBookAction action = new CheckoutBookAction(app, io);
+        action.execute();
+
+        assertThat(harness.getOutput(), (containsString("Thank you! Enjoy the book")));
+    }
+
+    @Test
+    public void promptMessageTest() {
+        IOHarness harness = new IOHarness();
+        IO io = harness.createTestIO("");
+        BibliotecaApp app = new BibliotecaApp(io);
+        CheckoutBookAction action = new CheckoutBookAction(app, io);
+        try {
+            action.execute();
+        } catch (NoSuchElementException e) {}
+        assertThat(harness.getOutput(), (containsString("Enter a book title to checkout:")));
     }
 }
