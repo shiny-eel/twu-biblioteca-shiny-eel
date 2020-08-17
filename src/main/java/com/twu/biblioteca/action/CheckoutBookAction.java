@@ -7,6 +7,7 @@ public class CheckoutBookAction extends Action {
 
     private static final String SUCCESS_MSG = "Thank you! Enjoy the book\n";
     private static final String PROMPT = "Enter a book title to checkout:";
+    private static final String FAIL_MSG = "Sorry, that book is not available";
 
     public CheckoutBookAction(Library lib, IO io) {
         super(lib, io);
@@ -22,8 +23,11 @@ public class CheckoutBookAction extends Action {
         io.println(PROMPT);
         String bookTitle = io.getInput();
         boolean success = lib.checkoutBook(bookTitle);
-        if (success)
+        if (success) {
             io.println(SUCCESS_MSG);
+        } else {
+            io.println(FAIL_MSG);
+        }
     }
 }
 

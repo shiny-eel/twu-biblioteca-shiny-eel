@@ -28,7 +28,7 @@ public class CheckoutBookActionTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void TestBookCheckoutTest() {
+    public void testBookCheckoutTest() {
         IOHarness harness = new IOHarness();
         Library mockLib = mock(Library.class);
         String book = "Test Book";
@@ -40,7 +40,7 @@ public class CheckoutBookActionTest {
     }
 
     @Test
-    public void AnotherBookCheckoutTest() {
+    public void anotherBookCheckoutTest() {
         IOHarness harness = new IOHarness();
         Library mockLib = mock(Library.class);
         String book = "Another One";
@@ -52,7 +52,7 @@ public class CheckoutBookActionTest {
     }
 
     @Test
-    public void ListChangedTest() {
+    public void listChangedTest() {
         IOHarness harness = new IOHarness();
         IO io = harness.createTestIO("");
         BibliotecaApp app = new BibliotecaApp(io);
@@ -90,5 +90,31 @@ public class CheckoutBookActionTest {
             action.execute();
         } catch (NoSuchElementException e) {}
         assertThat(harness.getOutput(), (containsString("Enter a book title to checkout:")));
+    }
+
+    @Test
+    public void invalidCheckoutTest() {
+        IOHarness harness = new IOHarness();
+        IO io = harness.createTestIO("");
+        BibliotecaApp app = new BibliotecaApp(io);
+
+
+        boolean result = app.checkoutBook("Non-existent Book");
+        assertThat(result, is(false));
+
+    }
+
+    @Test
+    public void invalidMessageTest() {
+        IOHarness harness = new IOHarness();
+        Library mockLib = mock(Library.class);
+        String book = "Another One";
+        when(mockLib.checkoutBook(book)).thenReturn(false);
+        IO io = harness.createTestIO(book);
+        CheckoutBookAction action = new CheckoutBookAction(mockLib, io);
+        action.execute();
+        assertThat(harness.getOutput(), (containsString("Sorry, that book is not available")));
+
+
     }
 }
