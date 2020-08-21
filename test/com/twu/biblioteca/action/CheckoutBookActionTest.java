@@ -52,20 +52,16 @@ public class CheckoutBookActionTest {
     }
 
     @Test
-    public void listChangedTest() {
+    public void availabilityChangedTest() {
         IOHarness harness = new IOHarness();
         IO io = harness.createTestIO("");
         BibliotecaApp app = new BibliotecaApp(io);
-        ListBooksAction listAction = new ListBooksAction(app, io);
+        List<Book> bookList = app.getBookList();
+        Book testBook = bookList.get(1);
+        assertThat(testBook.isAvailable(), is(true));
 
-        listAction.execute();
-        assertThat(harness.getOutput(), (containsString("Art of War | Sun Tzu | 500")));
-
-        harness.clearOutput();
-        app.checkoutBook("Art of War");
-        listAction.execute();
-        assertThat(harness.getOutput(), not(containsString("Art of War | Sun Tzu | 500")));
-
+        app.checkoutBook("Infinite Jest");
+        assertThat(testBook.isAvailable(), is(false));
     }
 
 
