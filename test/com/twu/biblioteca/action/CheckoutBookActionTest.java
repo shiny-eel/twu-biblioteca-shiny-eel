@@ -24,9 +24,6 @@ import static org.mockito.Mockito.when;
 
 public class CheckoutBookActionTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
     @Test
     public void testBookCheckoutTest() {
         IOHarness harness = new IOHarness();
