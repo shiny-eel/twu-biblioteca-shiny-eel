@@ -50,6 +50,15 @@ public class BibliotecaApp extends Library {
 
     @Override
     public boolean returnBook(String bookTitle) {
+        bookTitle = bookTitle.toLowerCase();
+        for (Book book : getBookList()) {
+            if (bookTitle.matches(book.title.toLowerCase())) {
+                if (!book.isAvailable()) {
+                    book.setAvailable(true);
+                    return true;
+                }
+            }
+        }
         return false;
     }
 }

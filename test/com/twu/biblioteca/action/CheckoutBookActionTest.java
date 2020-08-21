@@ -48,18 +48,6 @@ public class CheckoutBookActionTest {
 
     }
 
-    @Test
-    public void availabilityChangedTest() {
-        IOHarness harness = new IOHarness();
-        IO io = harness.createTestIO("");
-        BibliotecaApp app = new BibliotecaApp(io);
-        List<Book> bookList = app.getBookList();
-        Book testBook = bookList.get(1);
-        assertThat(testBook.isAvailable(), is(true));
-
-        app.checkoutBook("Infinite Jest");
-        assertThat(testBook.isAvailable(), is(false));
-    }
 
 
     @Test
@@ -85,17 +73,6 @@ public class CheckoutBookActionTest {
         assertThat(harness.getOutput(), (containsString("Enter a book title to checkout:")));
     }
 
-    @Test
-    public void invalidCheckoutTest() {
-        IOHarness harness = new IOHarness();
-        IO io = harness.createTestIO("");
-        BibliotecaApp app = new BibliotecaApp(io);
-
-
-        boolean result = app.checkoutBook("Non-existent Book");
-        assertThat(result, is(false));
-
-    }
 
     @Test
     public void invalidMessageTest() {

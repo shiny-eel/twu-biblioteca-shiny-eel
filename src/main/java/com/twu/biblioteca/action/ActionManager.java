@@ -43,7 +43,8 @@ public class ActionManager {
     private void createActions() {
         actions.put(1, new ListBooksAction(lib, io));
         actions.put(2, new CheckoutBookAction(lib, io));
-        actions.put(3, new QuitAction(lib, io));
+        actions.put(3, new ReturnBookAction(lib, io));
+        actions.put(4, new QuitAction(lib, io));
     }
 
     private void displayMenu() {
