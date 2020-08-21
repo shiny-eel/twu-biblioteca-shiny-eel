@@ -11,7 +11,7 @@ public abstract class Library {
 
     public abstract List<Book> getBookList();
 
-
+    public abstract boolean returnBook(String bookTitle);
 
     public abstract boolean checkoutBook(String bookTitle);
 

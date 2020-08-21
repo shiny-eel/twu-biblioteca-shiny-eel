@@ -36,8 +36,9 @@ public class BibliotecaApp extends Library {
 
     @Override
     public boolean checkoutBook(String bookTitle) {
+        bookTitle = bookTitle.toLowerCase();
         for (Book book : getBookList()) {
-            if (bookTitle.matches(book.title)) {
+            if (bookTitle.matches(book.title.toLowerCase())) {
                 if (book.isAvailable()) {
                     book.setAvailable(false);
                     return true;
@@ -47,5 +48,8 @@ public class BibliotecaApp extends Library {
         return false;
     }
 
-
+    @Override
+    public boolean returnBook(String bookTitle) {
+        return false;
+    }
 }
