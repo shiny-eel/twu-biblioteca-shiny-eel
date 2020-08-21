@@ -115,6 +115,5 @@ public class CheckoutBookActionTest {
         action.execute();
         assertThat(harness.getOutput(), (containsString("Sorry, that book is not available")));
 
-
     }
 }

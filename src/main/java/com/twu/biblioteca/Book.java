@@ -5,10 +5,15 @@ public class Book {
     String title;
     String author;
     int year;
-    boolean isAvailable;
+    private boolean isAvailable;
+
+
 
     public boolean isAvailable() {
         return isAvailable;
+    }
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
 

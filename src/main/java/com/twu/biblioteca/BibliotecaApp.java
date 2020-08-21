@@ -38,8 +38,8 @@ public class BibliotecaApp extends Library {
     public boolean checkoutBook(String bookTitle) {
         for (Book book : getBookList()) {
             if (bookTitle.matches(book.title)) {
-                if (book.isAvailable) {
-                    book.isAvailable = false;
+                if (book.isAvailable()) {
+                    book.setAvailable(false);
                     return true;
                 }
             }
