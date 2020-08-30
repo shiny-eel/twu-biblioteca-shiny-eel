@@ -15,6 +15,10 @@ public abstract class Library {
 
     public abstract boolean checkoutBook(String bookTitle);
 
+
+    public abstract List<Movie> getMovieList();
+    public abstract boolean checkoutMovie(String bookTitle);
+
     public void quit() {
         System.exit(0);
     }

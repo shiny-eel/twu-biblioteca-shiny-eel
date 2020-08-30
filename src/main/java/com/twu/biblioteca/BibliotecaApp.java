@@ -61,4 +61,14 @@ public class BibliotecaApp extends Library {
         }
         return false;
     }
+
+    @Override
+    public List<Movie> getMovieList() {
+        return null;
+    }
+
+    @Override
+    public boolean checkoutMovie(String bookTitle) {
+        return false;
+    }
 }
