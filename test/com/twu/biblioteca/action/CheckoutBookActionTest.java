@@ -1,26 +1,16 @@
 package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.BibliotecaApp;
-import com.twu.biblioteca.Book;
-import com.twu.biblioteca.BookFactoryTest;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
-import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.contains;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.*;
 
 public class CheckoutBookActionTest {
 
@@ -49,7 +39,6 @@ public class CheckoutBookActionTest {
     }
 
 
-
     @Test
     public void successMessageTest() {
         IOHarness harness = new IOHarness();
@@ -69,7 +58,8 @@ public class CheckoutBookActionTest {
         CheckoutBookAction action = new CheckoutBookAction(app, io);
         try {
             action.execute();
-        } catch (NoSuchElementException e) {}
+        } catch (NoSuchElementException e) {
+        }
         assertThat(harness.getOutput(), (containsString("Enter a book title to checkout:")));
     }
 

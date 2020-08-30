@@ -8,10 +8,10 @@ import java.util.Map;
 
 public class ActionManager {
 
+    private static final String INVALID_PROMPT = "Please select a valid option!";
     private Library lib;
     private IO io;
     private Map<Integer, Action> actions = new HashMap<>();
-    private static final String INVALID_PROMPT = "Please select a valid option!";
 
     public ActionManager(Library lib, IO io) {
         this.io = io;
@@ -49,7 +49,7 @@ public class ActionManager {
 
     private void displayMenu() {
         io.println("Select an option:");
-        for (int i=1; i<=actions.size(); i++) {
+        for (int i = 1; i <= actions.size(); i++) {
             io.println(i + ". " + actions.get(i).getTitle());
         }
     }

@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Responsibility to fulfill requests of a library
- *
+ * <p>
  * Such as listing and loaning books
  */
 public abstract class Library {
@@ -15,5 +15,7 @@ public abstract class Library {
 
     public abstract boolean checkoutBook(String bookTitle);
 
-    public void quit() { System.exit(0);}
+    public void quit() {
+        System.exit(0);
+    }
 }

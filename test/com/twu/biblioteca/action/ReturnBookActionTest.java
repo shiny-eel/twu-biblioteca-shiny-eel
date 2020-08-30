@@ -1,6 +1,5 @@
 package com.twu.biblioteca.action;
 
-import com.twu.biblioteca.BibliotecaApp;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
@@ -9,11 +8,8 @@ import org.junit.Test;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.*;
 
 public class ReturnBookActionTest {
 
@@ -25,7 +21,8 @@ public class ReturnBookActionTest {
         ReturnBookAction action = new ReturnBookAction(mockLib, io);
         try {
             action.execute();
-        } catch (NoSuchElementException e) {}
+        } catch (NoSuchElementException e) {
+        }
         assertThat(harness.getOutput(), (containsString("Enter a book title to return:")));
     }
 

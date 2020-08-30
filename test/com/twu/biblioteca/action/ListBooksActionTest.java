@@ -8,12 +8,10 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ListBooksActionTest {
@@ -41,7 +39,7 @@ public class ListBooksActionTest {
         listBooksAction.execute();
 
         assertThat(harness.getOutput(), containsString("Another One | Rubber Ducky | 1\n"));
-        assertThat(harness.getOutput(), not(containsString( "Test Book | Foo Bar | 999\n")));
+        assertThat(harness.getOutput(), not(containsString("Test Book | Foo Bar | 999\n")));
 
 
     }

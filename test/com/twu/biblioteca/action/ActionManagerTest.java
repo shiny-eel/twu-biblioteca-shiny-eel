@@ -1,7 +1,6 @@
 package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.BibliotecaApp;
-import com.twu.biblioteca.Book;
 import com.twu.biblioteca.BookFactoryTest;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
@@ -9,11 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.containsString;
@@ -78,7 +72,6 @@ public class ActionManagerTest {
      * "Infinite Jest | David Foster Wallace | 1996\n" +
      * "David and Goliath | Malcolm Gladwell | 2013"));
      */
-
 
 
 }

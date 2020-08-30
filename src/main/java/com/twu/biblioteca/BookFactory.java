@@ -8,8 +8,8 @@ import java.util.List;
 
 public class BookFactory {
     static final Logger log = LogManager.getLogger(BookFactory.class.getName());
-    private List<Book> bookList;
     BibliotecaApp app;
+    private List<Book> bookList;
 
 
     public BookFactory(BibliotecaApp app) {

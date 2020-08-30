@@ -7,19 +7,27 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class BookFactoryTest {
 
     private BibliotecaApp mockApp;
 
+    public static List<Book> createFakeList() {
+        List<Book> li = new LinkedList<>();
+        Book b = new Book("Test Book", "Foo Bar", 999);
+        li.add(b);
+        b = new Book("Another One", "Rubber Ducky", 1);
+        li.add(b);
+        return li;
+    }
+
     @Before
     public void setUp() throws Exception {
         mockApp = mock(BibliotecaApp.class);
 
     }
-
 
     @Test
     public void testBookTitles() throws Exception {
@@ -49,14 +57,5 @@ public class BookFactoryTest {
         assertThat(reader.getBookList().get(1).year, is(1996));
         assertThat(reader.getBookList().get(2).year, is(2013));
 
-    }
-
-    public static List<Book> createFakeList() {
-        List<Book> li = new LinkedList<>();
-        Book b = new Book("Test Book", "Foo Bar", 999);
-        li.add(b);
-        b = new Book("Another One", "Rubber Ducky", 1);
-        li.add(b);
-        return li;
     }
 }
