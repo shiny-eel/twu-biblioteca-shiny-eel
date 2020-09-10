@@ -1,8 +1,7 @@
 package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.BibliotecaApp;
-import com.twu.biblioteca.Book;
-import com.twu.biblioteca.Library;
+import item.Book;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
 import org.junit.Test;
@@ -13,7 +12,6 @@ import java.util.NoSuchElementException;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
 
 public class CheckoutBookActionTest {
 

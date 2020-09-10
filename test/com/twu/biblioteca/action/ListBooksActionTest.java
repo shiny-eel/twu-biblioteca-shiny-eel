@@ -1,7 +1,7 @@
 package com.twu.biblioteca.action;
 
-import com.twu.biblioteca.Book;
-import com.twu.biblioteca.BookFactoryTest;
+import com.twu.biblioteca.ItemFactoryTest;
+import item.Book;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IOHarness;
 import org.junit.Test;
@@ -20,7 +20,7 @@ public class ListBooksActionTest {
     public void listBooksTest() {
         IOHarness harness = new IOHarness();
         Library mockLib = mock(Library.class);
-        when(mockLib.getBookList()).thenReturn(BookFactoryTest.createFakeList());
+        when(mockLib.getBookList()).thenReturn(ItemFactoryTest.createFakeBooks());
         ListBooksAction listBooksAction = new ListBooksAction(mockLib, harness.createTestIO(""));
         listBooksAction.execute();
 
@@ -32,7 +32,7 @@ public class ListBooksActionTest {
     public void ignoreCheckedOutBookTest() {
         IOHarness harness = new IOHarness();
         Library mockLib = mock(Library.class);
-        List<Book> books = BookFactoryTest.createFakeList();
+        List<Book> books = ItemFactoryTest.createFakeBooks();
         books.get(0).setAvailable(false);
         when(mockLib.getBookList()).thenReturn(books);
         ListBooksAction listBooksAction = new ListBooksAction(mockLib, harness.createTestIO(""));

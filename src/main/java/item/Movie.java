@@ -1,33 +1,32 @@
-package com.twu.biblioteca;
+package item;
 
-public class Movie {
+public class Movie extends Item {
 
-    protected String title;
-    protected String director;
-    protected int year;
-    protected int rating = 0;
+    private int rating = 0;
 
     public Movie(String title, String director, int year, int rating) {
-        this(title, director, year);
+        super(title, director, year);
         this.rating = (rating >= 0 ? rating : 0);
     }
 
     public Movie(String title, String director, int year) {
-        this.title = title;
-        this.director = director;
-        this.year = year;
+        super(title, director, year);
+
     }
 
+    public String getDirector() {
+        return creator;
+    }
+
+    public int getRating() {
+        return rating;
+    }
 
     @Override
     public String toString() {
         String ratingStr = (rating == 0 ? "unrated" : String.valueOf(rating));
         StringBuilder sb = new StringBuilder();
-        sb.append(title)
-                .append(" | ")
-                .append(director)
-                .append(" | ")
-                .append(year)
+        sb.append(super.toString())
                 .append(" | ")
                 .append(ratingStr);
         return sb.toString();

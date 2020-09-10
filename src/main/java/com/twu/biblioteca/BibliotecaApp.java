@@ -2,19 +2,24 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.action.ActionManager;
 import com.twu.biblioteca.io.IO;
+import item.Book;
+import item.ItemFactory;
+import item.Movie;
 
 import java.util.List;
 
 public class BibliotecaApp extends Library {
 
     protected IO io;
-    BookFactory bookFactory;
+    private List<Movie> movieList;
+    private List<Book> bookList;
     ActionManager actionManager;
 
     public BibliotecaApp(IO io) {
         this.io = io;
-        bookFactory = new BookFactory(this);
-
+        ItemFactory itemFactory = new ItemFactory();
+        movieList = itemFactory.getMovieList();
+        bookList = itemFactory.getBookList();
     }
 
     public void initialise() {
@@ -26,9 +31,9 @@ public class BibliotecaApp extends Library {
 
     @Override
     public List<Book> getBookList() {
-        return bookFactory.getBookList();
+        return bookList;
     }
-    
+
 
     @Override
     public List<Movie> getMovieList() {

@@ -1,5 +1,8 @@
 package com.twu.biblioteca;
 
+import item.Book;
+import item.Movie;
+
 import java.util.List;
 
 /**

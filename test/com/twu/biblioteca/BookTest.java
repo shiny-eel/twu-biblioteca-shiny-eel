@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import item.Book;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;

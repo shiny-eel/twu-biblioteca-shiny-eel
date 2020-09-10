@@ -1,13 +1,11 @@
 package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.*;
-import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
+import item.Movie;
 import org.junit.Test;
-import org.mockito.Matchers;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.*;
@@ -32,7 +30,7 @@ public class ListMoviesActionTest {
     public void listDisplayedTest() {
         IOHarness harness = new IOHarness();
         Library mockLib = mock(Library.class);
-        List<Movie> movies = MovieFactoryTest.createFakeList();
+        List<Movie> movies = ItemFactoryTest.createFakeMovies();
         ListMoviesAction action = new ListMoviesAction(mockLib, harness.createTestIO(""));
         when(mockLib.getMovieList()).thenReturn(movies);
         action.execute();

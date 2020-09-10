@@ -1,31 +1,28 @@
-package com.twu.biblioteca;
+package item;
 
-public class Book {
+public abstract class Item {
+    private String title;
+    protected int year;
+    protected String creator;
+    private boolean isAvailable;
 
-    public String getTitle() {
-        return title;
+    public Item(String title, String creator, int year) {
+        this.title = title;
+        this.year = year;
+        this.creator = creator;
+        isAvailable = true;
     }
 
-    private String title;
-
-    public String getAuthor() {
-        return author;
+    public String getCreator() {
+        return creator;
     }
 
     public int getYear() {
         return year;
     }
 
-    private String author;
-    private int year;
-    private boolean isAvailable;
-
-
-    public Book(String title, String author, int year) {
-        this.title = title;
-        this.author = author;
-        this.year = year;
-        this.isAvailable = true;
+    public String getTitle() {
+        return title;
     }
 
     public boolean isAvailable() {
@@ -41,7 +38,7 @@ public class Book {
         StringBuilder sb = new StringBuilder();
         sb.append(title)
                 .append(" | ")
-                .append(author)
+                .append(creator)
                 .append(" | ")
                 .append(year);
         return sb.toString();

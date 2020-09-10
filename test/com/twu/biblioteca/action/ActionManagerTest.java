@@ -1,7 +1,7 @@
 package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.BibliotecaApp;
-import com.twu.biblioteca.BookFactoryTest;
+import com.twu.biblioteca.ItemFactoryTest;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
 import org.junit.Before;
@@ -23,7 +23,7 @@ public class ActionManagerTest {
     @Before
     public void setUp() throws Exception {
         mockApp = mock(BibliotecaApp.class);
-        when(mockApp.getBookList()).thenReturn(BookFactoryTest.createFakeList());
+        when(mockApp.getBookList()).thenReturn(ItemFactoryTest.createFakeBooks());
     }
 
     public void start(String input) {
