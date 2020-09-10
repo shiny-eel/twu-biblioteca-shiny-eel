@@ -1,14 +1,14 @@
 package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.Library;
+import com.twu.biblioteca.item.Item;
 import com.twu.biblioteca.item.Movie;
 import com.twu.biblioteca.io.IO;
 
 import java.util.List;
 
-public class ListMoviesAction extends Action {
+public class ListMoviesAction extends ListItemsAction {
 
-    private static final String SEPARATOR = "--------------------";
 
     public ListMoviesAction(Library lib, IO io) {
         super(lib, io);
@@ -20,12 +20,7 @@ public class ListMoviesAction extends Action {
     }
 
     @Override
-    void execute() {
-        List<Movie> movies = lib.getMovieList();
-        io.println(SEPARATOR);
-        for (Movie movie: movies) {
-                io.println(movie.toString());
-        }
-        io.println(SEPARATOR);
+    List<? extends Item> getItems() {
+        return lib.getMovieList();
     }
 }
