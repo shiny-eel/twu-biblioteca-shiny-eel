@@ -2,7 +2,7 @@ package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.*;
 import com.twu.biblioteca.io.IOHarness;
-import item.Movie;
+import com.twu.biblioteca.item.Movie;
 import org.junit.Test;
 
 import java.util.List;

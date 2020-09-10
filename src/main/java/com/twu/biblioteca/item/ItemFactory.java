@@ -1,4 +1,4 @@
-package item;
+package com.twu.biblioteca.item;
 
 import java.util.LinkedList;
 import java.util.List;

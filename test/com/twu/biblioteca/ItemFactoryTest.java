@@ -1,8 +1,8 @@
 package com.twu.biblioteca;
 
-import item.Book;
-import item.ItemFactory;
-import item.Movie;
+import com.twu.biblioteca.item.Book;
+import com.twu.biblioteca.item.ItemFactory;
+import com.twu.biblioteca.item.Movie;
 import org.junit.Test;
 
 import java.util.LinkedList;

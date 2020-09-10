@@ -1,4 +1,4 @@
-package item;
+package com.twu.biblioteca.item;
 
 public abstract class Item {
     private String title;

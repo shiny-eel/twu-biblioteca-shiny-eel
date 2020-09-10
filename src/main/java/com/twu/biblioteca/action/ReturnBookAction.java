@@ -1,6 +1,6 @@
 package com.twu.biblioteca.action;
 
-import item.Book;
+import com.twu.biblioteca.item.Book;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
 

@@ -1,7 +1,7 @@
 package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.ItemFactoryTest;
-import item.Book;
+import com.twu.biblioteca.item.Book;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IOHarness;
 import org.junit.Test;
