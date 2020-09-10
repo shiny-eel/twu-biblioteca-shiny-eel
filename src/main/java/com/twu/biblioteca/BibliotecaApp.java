@@ -37,11 +37,7 @@ public class BibliotecaApp extends Library {
 
     @Override
     public List<Movie> getMovieList() {
-        return null;
+        return movieList;
     }
 
-    @Override
-    public boolean checkoutMovie(String bookTitle) {
-        return false;
-    }
 }

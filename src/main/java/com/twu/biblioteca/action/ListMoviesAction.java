@@ -16,7 +16,7 @@ public class ListMoviesAction extends Action {
 
     @Override
     String getTitle() {
-        return null;
+        return "List of movies";
     }
 
     @Override

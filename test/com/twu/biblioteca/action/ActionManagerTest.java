@@ -17,7 +17,6 @@ import static org.mockito.Mockito.*;
 public class ActionManagerTest {
     private ActionManager am;
     private BibliotecaApp mockApp;
-    private ByteArrayInputStream is;
     private IOHarness ioHarness = new IOHarness();
 
     @Before
@@ -40,7 +39,8 @@ public class ActionManagerTest {
         start("");
         String expected = "1. List of books\n" + "2. Checkout a book\n"
                 + "3. Return a book\n"
-                + "4. Quit";
+                + "4. List of movies\n"
+                + "5. Quit";
         assertThat(ioHarness.getOutput(), containsString(expected));
     }
 
@@ -62,7 +62,7 @@ public class ActionManagerTest {
 
     @Test
     public void testQuitOptionSelect() {
-        start("4"); // Assuming 3 is the quit option
+        start("5"); // Assuming 3 is the quit option
         verify(mockApp).quit();
     }
 
