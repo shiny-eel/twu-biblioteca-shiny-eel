@@ -31,31 +31,28 @@ public class BookFactoryTest {
 
     @Test
     public void testBookTitles() throws Exception {
-        BookFactory reader = new BookFactory(mockApp);
-        reader.createBooks();
-        assertThat(reader.getBookList().get(0).title, is("Art of War"));
-        assertThat(reader.getBookList().get(1).title, is("Infinite Jest"));
-        assertThat(reader.getBookList().get(2).title, is("David and Goliath"));
+        BookFactory factory = new BookFactory(mockApp);
+        assertThat(factory.getBookList().get(0).getTitle(), is("Art of War"));
+        assertThat(factory.getBookList().get(1).getTitle(), is("Infinite Jest"));
+        assertThat(factory.getBookList().get(2).getTitle(), is("David and Goliath"));
 
     }
 
     @Test
     public void testBookAuthors() throws Exception {
-        BookFactory reader = new BookFactory(mockApp);
-        reader.createBooks();
-        assertThat(reader.getBookList().get(0).author, is("Sun Tzu"));
-        assertThat(reader.getBookList().get(1).author, is("David Foster Wallace"));
-        assertThat(reader.getBookList().get(2).author, is("Malcolm Gladwell"));
+        BookFactory factory = new BookFactory(mockApp);
+        assertThat(factory.getBookList().get(0).getAuthor(), is("Sun Tzu"));
+        assertThat(factory.getBookList().get(1).getAuthor(), is("David Foster Wallace"));
+        assertThat(factory.getBookList().get(2).getAuthor(), is("Malcolm Gladwell"));
 
     }
 
     @Test
     public void testBookYears() throws Exception {
-        BookFactory reader = new BookFactory(mockApp);
-        reader.createBooks();
-        assertThat(reader.getBookList().get(0).year, is(500));
-        assertThat(reader.getBookList().get(1).year, is(1996));
-        assertThat(reader.getBookList().get(2).year, is(2013));
+        BookFactory factory = new BookFactory(mockApp);
+        assertThat(factory.getBookList().get(0).getYear(), is(500));
+        assertThat(factory.getBookList().get(1).getYear(), is(1996));
+        assertThat(factory.getBookList().get(2).getYear(), is(2013));
 
     }
 }

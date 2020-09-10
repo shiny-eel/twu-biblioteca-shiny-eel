@@ -56,57 +56,6 @@ public class BibliotecaTest {
     }
 
 
-    @Test
-    public void validCheckoutTest() {
-        IOHarness harness = new IOHarness();
-        IO io = harness.createTestIO("");
-        BibliotecaApp app = new BibliotecaApp(io);
-        List<Book> bookList = app.getBookList();
-        Book testBook = bookList.get(1);
-        assertThat(testBook.isAvailable(), is(true));
-
-        app.checkoutBook("Infinite Jest");
-        assertThat(testBook.isAvailable(), is(false));
-    }
 
 
-    @Test
-    public void invalidCheckoutTest() {
-        IOHarness harness = new IOHarness();
-        IO io = harness.createTestIO("");
-        BibliotecaApp app = new BibliotecaApp(io);
-
-
-        boolean result = app.checkoutBook("Non-existent Book");
-        assertThat(result, is(false));
-
-    }
-
-
-    @Test
-    public void validReturnTest() {
-        IOHarness harness = new IOHarness();
-        IO io = harness.createTestIO("");
-        BibliotecaApp app = new BibliotecaApp(io);
-        List<Book> bookList = app.getBookList();
-        Book testBook = bookList.get(1);
-        testBook.setAvailable(false);
-
-        app.returnBook("Infinite Jest");
-        assertThat(testBook.isAvailable(), is(true));
-    }
-
-
-    @Test
-    public void invalidReturnTest() {
-        IOHarness harness = new IOHarness();
-        IO io = harness.createTestIO("");
-        BibliotecaApp app = new BibliotecaApp(io);
-
-        boolean result = app.returnBook("Non-existent Book");
-        assertThat(result, is(false));
-
-        result = app.returnBook("Infinite Jest"); // existing but available
-        assertThat(result, is(false));
-    }
 }

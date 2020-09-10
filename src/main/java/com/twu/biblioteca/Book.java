@@ -2,9 +2,22 @@ package com.twu.biblioteca;
 
 public class Book {
 
-    String title;
-    String author;
-    int year;
+    public String getTitle() {
+        return title;
+    }
+
+    private String title;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    private String author;
+    private int year;
     private boolean isAvailable;
 
 

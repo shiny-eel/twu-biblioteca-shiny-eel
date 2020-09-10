@@ -11,17 +11,12 @@ public class BookFactory {
     BibliotecaApp app;
     private List<Book> bookList;
 
-
     public BookFactory(BibliotecaApp app) {
         this.app = app;
-    }
-
-    public void createBooks() {
         bookList = new LinkedList<>();
         bookList.add(new Book("Art of War", "Sun Tzu", 500));
         bookList.add(new Book("Infinite Jest", "David Foster Wallace", 1996));
         bookList.add(new Book("David and Goliath", "Malcolm Gladwell", 2013));
-
     }
 
     public List<Book> getBookList() {

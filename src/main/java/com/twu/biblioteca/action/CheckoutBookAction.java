@@ -1,5 +1,6 @@
 package com.twu.biblioteca.action;
 
+import com.twu.biblioteca.Book;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
 
@@ -22,12 +23,19 @@ public class CheckoutBookAction extends Action {
     void execute() {
         io.println(PROMPT);
         String bookTitle = io.getInput();
-        boolean success = lib.checkoutBook(bookTitle);
-        if (success) {
-            io.println(SUCCESS_MSG);
-        } else {
-            io.println(FAIL_MSG);
+        bookTitle = bookTitle.toLowerCase();
+        for (Book book : lib.getBookList()) {
+            if (bookTitle.matches(book.getTitle().toLowerCase())) {
+                if (book.isAvailable()) {
+                    book.setAvailable(false);
+                    io.println(SUCCESS_MSG);
+                    return;
+
+                }
+            }
         }
+        io.println(FAIL_MSG);
+
     }
 }
 

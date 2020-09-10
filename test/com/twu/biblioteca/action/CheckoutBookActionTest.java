@@ -1,40 +1,61 @@
 package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.BibliotecaApp;
+import com.twu.biblioteca.Book;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class CheckoutBookActionTest {
 
+
     @Test
-    public void testBookCheckoutTest() {
+    public void makeUnavailableTest() {
         IOHarness harness = new IOHarness();
-        Library mockLib = mock(Library.class);
-        String book = "Test Book";
-        IO io = harness.createTestIO(book);
-        CheckoutBookAction action = new CheckoutBookAction(mockLib, io);
+        IO io = harness.createTestIO("Infinite Jest");
+        BibliotecaApp app = new BibliotecaApp(io);
+        List<Book> bookList = app.getBookList();
+        Book testBook = bookList.get(1);
+        assertThat(testBook.isAvailable(), is(true));
+
+        CheckoutBookAction action = new CheckoutBookAction(app, io);
         action.execute();
-        verify(mockLib).checkoutBook(book);
+
+        assertThat(testBook.isAvailable(), is(false));
+    }
+
+    @Test
+    public void UnavailableTest() {
+        IOHarness harness = new IOHarness();
+        IO io = harness.createTestIO("Infinite Jest");
+        BibliotecaApp app = new BibliotecaApp(io);
+        app.getBookList().get(1).setAvailable(false);
+        CheckoutBookAction action = new CheckoutBookAction(app, io);
+        action.execute();
+
+        assertThat(harness.getOutput(), (containsString("Sorry, that book is not available")));
 
     }
 
     @Test
-    public void anotherBookCheckoutTest() {
+    public void NonexistentCheckoutTest() {
         IOHarness harness = new IOHarness();
-        Library mockLib = mock(Library.class);
-        String book = "Another One";
-        IO io = harness.createTestIO(book);
-        CheckoutBookAction action = new CheckoutBookAction(mockLib, io);
+        IO io = harness.createTestIO("Non-existent book");
+        BibliotecaApp app = new BibliotecaApp(io);
+
+        CheckoutBookAction action = new CheckoutBookAction(app, io);
         action.execute();
-        verify(mockLib).checkoutBook(book);
+
+        assertThat(harness.getOutput(), (containsString("Sorry, that book is not available")));
 
     }
 
@@ -64,16 +85,5 @@ public class CheckoutBookActionTest {
     }
 
 
-    @Test
-    public void invalidMessageTest() {
-        IOHarness harness = new IOHarness();
-        Library mockLib = mock(Library.class);
-        String book = "Another One";
-        when(mockLib.checkoutBook(book)).thenReturn(false);
-        IO io = harness.createTestIO(book);
-        CheckoutBookAction action = new CheckoutBookAction(mockLib, io);
-        action.execute();
-        assertThat(harness.getOutput(), (containsString("Sorry, that book is not available")));
 
-    }
 }
