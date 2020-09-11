@@ -1,5 +1,6 @@
-package com.twu.biblioteca.action;
+package com.twu.biblioteca.action.item;
 
+import com.twu.biblioteca.action.Action;
 import com.twu.biblioteca.item.Book;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
@@ -15,12 +16,12 @@ public class ReturnBookAction extends Action {
     }
 
     @Override
-    String getTitle() {
+    protected String getTitle() {
         return "Return a book";
     }
 
     @Override
-    void execute() {
+    protected void execute() {
         io.println(PROMPT);
         String bookTitle = io.getInput();
         bookTitle = bookTitle.toLowerCase();

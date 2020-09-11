@@ -1,6 +1,7 @@
-package com.twu.biblioteca.action;
+package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.*;
+import com.twu.biblioteca.action.item.ListMoviesAction;
 import com.twu.biblioteca.io.IOHarness;
 import com.twu.biblioteca.item.Movie;
 import org.junit.Test;

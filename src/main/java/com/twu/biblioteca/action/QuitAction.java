@@ -11,12 +11,12 @@ public class QuitAction extends Action {
 
 
     @Override
-    String getTitle() {
+    protected String getTitle() {
         return "Quit";
     }
 
     @Override
-    void execute() {
+    protected void execute() {
         lib.quit();
     }
 }

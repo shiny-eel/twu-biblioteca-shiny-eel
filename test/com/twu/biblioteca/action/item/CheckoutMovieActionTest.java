@@ -1,7 +1,8 @@
-package com.twu.biblioteca.action;
+package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.BibliotecaApp;
 import com.twu.biblioteca.ItemFactoryTest;
+import com.twu.biblioteca.action.item.CheckoutMovieAction;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
 import com.twu.biblioteca.item.Movie;

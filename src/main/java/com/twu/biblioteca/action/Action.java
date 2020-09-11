@@ -14,7 +14,7 @@ public abstract class Action {
 
     }
 
-    abstract String getTitle();
+    protected abstract String getTitle();
 
-    abstract void execute();
+    protected abstract void execute();
 }

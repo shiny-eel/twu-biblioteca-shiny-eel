@@ -1,8 +1,7 @@
-package com.twu.biblioteca.action;
+package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.item.Item;
-import com.twu.biblioteca.item.Movie;
 import com.twu.biblioteca.io.IO;
 
 import java.util.List;
@@ -15,7 +14,7 @@ public class ListMoviesAction extends ListItemsAction {
     }
 
     @Override
-    String getTitle() {
+    protected String getTitle() {
         return "List of movies";
     }
 

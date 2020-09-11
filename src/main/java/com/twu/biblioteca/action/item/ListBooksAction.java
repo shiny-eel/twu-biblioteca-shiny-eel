@@ -1,6 +1,5 @@
-package com.twu.biblioteca.action;
+package com.twu.biblioteca.action.item;
 
-import com.twu.biblioteca.item.Book;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.item.Item;
@@ -15,7 +14,7 @@ public class ListBooksAction extends ListItemsAction {
     }
 
     @Override
-    String getTitle() {
+    protected String getTitle() {
         return "List of books";
     }
 

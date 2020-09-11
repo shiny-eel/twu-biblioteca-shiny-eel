@@ -1,6 +1,7 @@
-package com.twu.biblioteca.action;
+package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.Library;
+import com.twu.biblioteca.action.Action;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.item.Item;
 
@@ -20,7 +21,7 @@ public abstract class CheckoutItemAction extends Action {
     abstract String getItemType();
 
     @Override
-    void execute() {
+    protected void execute() {
         String itemType = getItemType();
         io.println(String.format(PROMPT, itemType));
         String requestTitle = io.getInput();

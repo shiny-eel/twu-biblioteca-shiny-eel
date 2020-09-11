@@ -1,6 +1,7 @@
-package com.twu.biblioteca.action;
+package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.Library;
+import com.twu.biblioteca.action.Action;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.item.Item;
 
@@ -17,7 +18,7 @@ public abstract class ListItemsAction extends Action {
     abstract List<? extends Item> getItems();
 
     @Override
-    void execute() {
+    protected void execute() {
         List<? extends Item> items = getItems();
         io.println(SEPARATOR);
         for (Item item : items) {

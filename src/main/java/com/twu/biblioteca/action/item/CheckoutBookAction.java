@@ -1,4 +1,4 @@
-package com.twu.biblioteca.action;
+package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
@@ -19,7 +19,7 @@ public class CheckoutBookAction extends CheckoutItemAction {
     }
 
     @Override
-    String getTitle() {
+    protected String getTitle() {
         return "Checkout a book";
     }
 

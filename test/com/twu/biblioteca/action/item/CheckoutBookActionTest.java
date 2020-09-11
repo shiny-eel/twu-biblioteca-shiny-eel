@@ -1,6 +1,7 @@
-package com.twu.biblioteca.action;
+package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.BibliotecaApp;
+import com.twu.biblioteca.action.item.CheckoutBookAction;
 import com.twu.biblioteca.item.Book;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
