@@ -13,6 +13,7 @@ public class ReturnBookAction extends Action {
 
     public ReturnBookAction(Library lib, IO io) {
         super(lib, io);
+        this.access = Access.RESTRICTED;
     }
 
     @Override

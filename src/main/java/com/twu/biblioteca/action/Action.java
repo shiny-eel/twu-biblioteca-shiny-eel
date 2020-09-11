@@ -8,11 +8,19 @@ public abstract class Action {
     protected Library lib;
     protected IO io;
 
+    protected enum Access {
+        PUBLIC, RESTRICTED;
+    }
+
+    protected Access access = Access.PUBLIC;
+
     public Action(Library lib, IO io) {
         this.lib = lib;
         this.io = io;
 
     }
+
+
 
     protected abstract String getTitle();
 

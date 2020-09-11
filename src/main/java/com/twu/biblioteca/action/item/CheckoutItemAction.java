@@ -15,6 +15,7 @@ public abstract class CheckoutItemAction extends Action {
 
     public CheckoutItemAction(Library lib, IO io) {
         super(lib, io);
+        this.access = Access.RESTRICTED;
     }
 
     abstract List<? extends Item> getItems();

@@ -10,13 +10,10 @@ import java.util.List;
  * <p>
  * Such as listing and loaning books
  */
-public abstract class Library {
+public interface Library {
 
-    public abstract List<Book> getBookList();
+    List<Book> getBookList();
 
-    public abstract List<Movie> getMovieList();
+    List<Movie> getMovieList();
 
-    public void quit() {
-        System.exit(0);
-    }
 }

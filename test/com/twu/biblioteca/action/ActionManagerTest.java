@@ -27,7 +27,7 @@ public class ActionManagerTest {
 
     public void start(String input) {
         IO mockIO = ioHarness.createTestIO(input);
-        am = new ActionManager(mockApp, mockIO);
+        am = new ActionManager(mockApp, mockIO, mockApp);
         try {
             am.start();
         } catch (NoSuchElementException e) {
@@ -37,15 +37,21 @@ public class ActionManagerTest {
     @Test
     public void testMenuDisplayOptions() {
         start("");
-        String expected = "1. List of books\n"
-                + "2. Checkout a book\n"
-                + "3. Return a book\n"
-                + "4. List of movies\n"
-                + "5. Checkout a movie\n"
-                + "6. Quit";
+        String expected = "1. Login\n"
+                + "2. List of books\n"
+                + "3. List of movies\n"
+                + "4. Quit";
         assertThat(ioHarness.getOutput(), containsString(expected));
     }
 
+    /**
+     * "1. List of books\n"
+     + "2. Checkout a book\n"
+     + "3. Return a book\n"
+     + "4. List of movies\n"
+     + "5. Checkout a movie\n"
+     + "6. Quit";
+     */
 
     @Test
     public void testSelectListBooks() {

@@ -1,22 +1,28 @@
 package com.twu.biblioteca.action;
 
+import com.twu.biblioteca.Application;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.action.item.*;
 import com.twu.biblioteca.io.IO;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class ActionManager {
 
     private static final String INVALID_PROMPT = "Please select a valid option!";
     private Library lib;
+    private Application app;
     private IO io;
-    private Map<Integer, Action> actions = new HashMap<>();
+    private List<Action> actions = new LinkedList<>();
+    private Map<Integer, Action> availableActions = new HashMap<>();
 
-    public ActionManager(Library lib, IO io) {
+    public ActionManager(Library lib, IO io, Application app) {
         this.io = io;
         this.lib = lib;
+        this.app = app;
     }
 
     public void start() {
@@ -33,8 +39,8 @@ public class ActionManager {
                 io.println(INVALID_PROMPT);
                 continue;
             }
-            if (actions.containsKey(id)) {
-                actions.get(id).execute();
+            if (availableActions.containsKey(id)) {
+                availableActions.get(id).execute();
             } else { // A number but not a valid option
                 io.println(INVALID_PROMPT);
             }
@@ -42,19 +48,26 @@ public class ActionManager {
     }
 
     private void createActions() {
-        actions.put(1, new ListBooksAction(lib, io));
-        actions.put(2, new CheckoutBookAction(lib, io));
-        actions.put(3, new ReturnBookAction(lib, io));
-        actions.put(4, new ListMoviesAction(lib, io));
-        actions.put(5, new CheckoutMovieAction(lib, io));
-
-        actions.put(6, new QuitAction(lib, io));
+        actions.add(new LoginAction(lib, io));
+        actions.add(new ListBooksAction(lib, io));
+        actions.add(new CheckoutBookAction(lib, io));
+        actions.add(new ReturnBookAction(lib, io));
+        actions.add(new ListMoviesAction(lib, io));
+        actions.add(new CheckoutMovieAction(lib, io));
+        actions.add(new QuitAction(lib, io, app));
     }
 
     private void displayMenu() {
         io.println("Select an option:");
-        for (int i = 1; i <= actions.size(); i++) {
-            io.println(i + ". " + actions.get(i).getTitle());
+        availableActions.clear();
+        boolean isLoggedOn = app.isLoggedOn();
+        int id = 1;
+        for (Action action : actions) {
+            if (isLoggedOn | action.access == Action.Access.PUBLIC) {
+                availableActions.put(id, action);
+                io.println(id + ". " + action.getTitle());
+                id++;
+            }
         }
     }
 
