@@ -21,20 +21,22 @@ public abstract class CheckoutItemAction extends Action {
 
     @Override
     void execute() {
-        io.println(String.format(PROMPT, getItemType()));
+        String itemType = getItemType();
+        io.println(String.format(PROMPT, itemType));
         String requestTitle = io.getInput();
         requestTitle = requestTitle.toLowerCase();
+
         for (Item item: getItems()) {
             if (requestTitle.matches(item.getTitle().toLowerCase())) {
                 if (item.isAvailable()) {
                     item.setAvailable(false);
-                    io.println(String.format(SUCCESS_MSG, getItemType()));
+                    io.println(String.format(SUCCESS_MSG, itemType));
                     return;
 
                 }
             }
         }
-        io.println(String.format(FAIL_MSG, getItemType()));
+        io.println(String.format(FAIL_MSG, itemType));
 
     }
 
