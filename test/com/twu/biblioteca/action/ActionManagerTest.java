@@ -37,10 +37,12 @@ public class ActionManagerTest {
     @Test
     public void testMenuDisplayOptions() {
         start("");
-        String expected = "1. List of books\n" + "2. Checkout a book\n"
+        String expected = "1. List of books\n"
+                + "2. Checkout a book\n"
                 + "3. Return a book\n"
                 + "4. List of movies\n"
-                + "5. Quit";
+                + "5. Checkout a movie\n"
+                + "6. Quit";
         assertThat(ioHarness.getOutput(), containsString(expected));
     }
 
@@ -62,7 +64,7 @@ public class ActionManagerTest {
 
     @Test
     public void testQuitOptionSelect() {
-        start("5"); // Assuming 3 is the quit option
+        start("6"); // Assuming 6 is the quit option
         verify(mockApp).quit();
     }
 

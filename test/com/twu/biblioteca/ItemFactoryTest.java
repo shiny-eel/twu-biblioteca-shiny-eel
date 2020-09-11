@@ -13,6 +13,8 @@ import static org.junit.Assert.*;
 
 public class ItemFactoryTest {
 
+    public static final String WHIPLASH_TITLE = "Whiplash";
+
     public static List<Movie> createFakeMovies() {
         List<Movie> li = new LinkedList<>();
         Movie b = new Movie("Test", "Foo Bar", 999);
