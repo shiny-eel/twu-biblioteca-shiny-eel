@@ -47,6 +47,19 @@ public class ActionManagerTest {
         assertThat(ioHarness.getOutput(), containsString(expected));
     }
 
+    @Test
+    public void testMenuDisplayOptionsLoggedIn() { // Accounting for being logged in
+        when(mockApp.isLoggedIn()).thenReturn(true);
+        start("");
+        String expected = "1. List of books\n"
+                + "2. Checkout a book\n"
+                + "3. Return a book\n"
+                + "4. List of movies\n"
+                + "5. Checkout a movie\n"
+                + "6. Quit";
+        assertThat(ioHarness.getOutput(), containsString(expected));
+    }
+
     /**
      * "1. List of books\n"
      + "2. Checkout a book\n"
@@ -58,6 +71,7 @@ public class ActionManagerTest {
 
     @Test
     public void testSelectListBooks() {
+        when(mockApp.isLoggedIn()).thenReturn(true);
         start("1");
         String expected = "Test Book | Foo Bar | 999\n" + "Another One | Rubber Ducky | 1";
         assertThat(ioHarness.getOutput(), containsString(expected));
@@ -73,6 +87,7 @@ public class ActionManagerTest {
 
     @Test
     public void testQuitOptionSelect() {
+        when(mockApp.isLoggedIn()).thenReturn(true);
         start("6"); // Assuming 6 is the quit option
         verify(mockApp).quit();
     }

@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -38,14 +39,14 @@ public class LoginActionTest {
     public void successfulLoginTest() {
         IOHarness harness = new IOHarness();
         IO io = harness.createTestIO("123-4567\nmypassword");
-        BibliotecaApp app = mock(BibliotecaApp.class);
+        BibliotecaApp app = new BibliotecaApp(io);
 
         LoginAction action = new LoginAction(app, io, createMockReg(), app);
         action.execute();
 
         assertThat(harness.getOutput(), (containsString("Login successful")));
-        verify(app).logIn();
 
+        assertThat(app.isLoggedIn(), is(true));
     }
 
     @Test

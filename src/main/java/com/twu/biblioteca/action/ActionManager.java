@@ -64,10 +64,13 @@ public class ActionManager {
     private void displayMenu() {
         io.println("Select an option:");
         availableActions.clear();
-        boolean isLoggedOn = app.isLoggedIn();
+        boolean isLoggedIn = app.isLoggedIn();
         int id = 1;
         for (Action action : actions) {
-            if (isLoggedOn | action.access == Action.Access.PUBLIC) {
+            if (isLoggedIn && action.access == Action.Access.PUBLIC_ONLY)
+                continue;
+            if (isLoggedIn | action.access != Action.Access.RESTRICTED) {
+
                 availableActions.put(id, action);
                 io.println(id + ". " + action.getTitle());
                 id++;

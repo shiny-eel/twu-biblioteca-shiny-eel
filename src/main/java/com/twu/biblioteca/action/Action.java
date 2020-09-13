@@ -9,7 +9,7 @@ public abstract class Action {
     protected IO io;
 
     protected enum Access {
-        PUBLIC, RESTRICTED;
+        PUBLIC, RESTRICTED, PUBLIC_ONLY
     }
 
     protected Access access = Access.PUBLIC;

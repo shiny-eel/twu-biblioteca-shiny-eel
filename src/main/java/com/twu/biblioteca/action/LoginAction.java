@@ -19,6 +19,7 @@ public class LoginAction extends Action {
         super(lib, io);
         this.registry = registry;
         this.app = app;
+        this.access = Access.PUBLIC_ONLY;
     }
 
     @Override

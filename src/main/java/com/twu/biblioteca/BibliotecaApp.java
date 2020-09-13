@@ -11,7 +11,8 @@ import java.util.List;
 
 public class BibliotecaApp implements Library, Application {
 
-    protected IO io;
+    private boolean isLoggedIn;
+    private IO io;
     private List<Movie> movieList;
     private List<Book> bookList;
     ActionManager actionManager;
@@ -19,6 +20,7 @@ public class BibliotecaApp implements Library, Application {
 
     public BibliotecaApp(IO io) {
         this.io = io;
+        this.isLoggedIn = false;
         ItemFactory itemFactory = new ItemFactory();
         movieList = itemFactory.getMovieList();
         bookList = itemFactory.getBookList();
@@ -55,11 +57,11 @@ public class BibliotecaApp implements Library, Application {
 
     @Override
     public void logIn() {
-
+        isLoggedIn = true;
     }
 
     @Override
     public boolean isLoggedIn() {
-        return false;
+        return isLoggedIn;
     }
 }
