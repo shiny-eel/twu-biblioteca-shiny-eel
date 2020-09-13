@@ -6,7 +6,7 @@ import com.twu.biblioteca.item.Item;
 
 import java.util.List;
 
-public class CheckoutMovieAction extends  CheckoutItemAction {
+public class CheckoutMovieAction extends CheckoutItemAction {
 
     public CheckoutMovieAction(IO io, Library lib) {
         super(io, lib);

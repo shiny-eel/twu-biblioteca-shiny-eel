@@ -1,9 +1,9 @@
 package com.twu.biblioteca.item;
 
 public abstract class Item {
-    private String title;
     protected int year;
     protected String creator;
+    private String title;
     private boolean isAvailable;
 
     public Item(String title, String creator, int year) {

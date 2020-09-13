@@ -22,6 +22,7 @@ public abstract class CheckoutItemAction extends Action {
     }
 
     abstract List<? extends Item> getItems();
+
     abstract String getItemType();
 
     @Override
@@ -31,7 +32,7 @@ public abstract class CheckoutItemAction extends Action {
         String requestTitle = io.getInput();
         requestTitle = requestTitle.toLowerCase();
 
-        for (Item item: getItems()) {
+        for (Item item : getItems()) {
             if (requestTitle.matches(item.getTitle().toLowerCase())) {
                 if (item.isAvailable()) {
                     item.setAvailable(false);

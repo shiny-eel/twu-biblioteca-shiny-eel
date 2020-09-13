@@ -5,11 +5,6 @@ import com.twu.biblioteca.io.IO;
 public abstract class Action {
 
     protected IO io;
-
-    protected enum Access {
-        PUBLIC, RESTRICTED, PUBLIC_ONLY
-    }
-
     protected Access access = Access.PUBLIC;
 
     public Action(IO io) {
@@ -17,9 +12,11 @@ public abstract class Action {
 
     }
 
-
-
     protected abstract String getTitle();
 
     protected abstract void execute();
+
+    protected enum Access {
+        PUBLIC, RESTRICTED, PUBLIC_ONLY
+    }
 }

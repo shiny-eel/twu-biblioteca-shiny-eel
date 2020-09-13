@@ -22,6 +22,7 @@ public class ItemFactory {
     public List<Movie> getMovieList() {
         return movieList;
     }
+
     public List<Book> getBookList() {
         return bookList;
     }
