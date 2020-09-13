@@ -9,8 +9,8 @@ import java.util.List;
 public class ListMoviesAction extends ListItemsAction {
 
 
-    public ListMoviesAction(Library lib, IO io) {
-        super(lib, io);
+    public ListMoviesAction(IO io, Library lib) {
+        super(io, lib);
     }
 
     @Override

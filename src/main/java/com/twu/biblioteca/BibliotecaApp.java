@@ -29,7 +29,7 @@ public class BibliotecaApp implements Library, Application {
 
     public void initialise() {
         io.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
-        actionManager = new ActionManager(this, io, this, registry);
+        actionManager = new ActionManager(io, this, registry, this);
         actionManager.start();
     }
 
@@ -38,8 +38,7 @@ public class BibliotecaApp implements Library, Application {
     public List<Book> getBookList() {
         return bookList;
     }
-
-
+    
     @Override
     public List<Movie> getMovieList() {
         return movieList;
@@ -49,11 +48,6 @@ public class BibliotecaApp implements Library, Application {
     public void quit() {
         System.exit(0);
     }
-
-//    @Override
-//    public Registry getRegistry() {
-//        return null;
-//    }
 
     @Override
     public void logIn() {

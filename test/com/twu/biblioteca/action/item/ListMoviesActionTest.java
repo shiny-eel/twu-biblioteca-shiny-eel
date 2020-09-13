@@ -1,7 +1,6 @@
 package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.*;
-import com.twu.biblioteca.action.item.ListMoviesAction;
 import com.twu.biblioteca.io.IOHarness;
 import com.twu.biblioteca.item.Movie;
 import org.junit.Test;
@@ -23,7 +22,7 @@ public class ListMoviesActionTest {
         IOHarness harness = new IOHarness();
         Library mockLib = mock(Library.class);
 
-        ListMoviesAction action = new ListMoviesAction(mockLib, harness.createTestIO(""));
+        ListMoviesAction action = new ListMoviesAction(harness.createTestIO(""), mockLib);
         assertThat(action.getTitle(), is("List of movies"));
     }
 
@@ -32,7 +31,7 @@ public class ListMoviesActionTest {
         IOHarness harness = new IOHarness();
         Library mockLib = mock(Library.class);
 
-        ListMoviesAction action = new ListMoviesAction(mockLib, harness.createTestIO(""));
+        ListMoviesAction action = new ListMoviesAction(harness.createTestIO(""), mockLib);
         action.execute();
 
         verify(mockLib).getMovieList();
@@ -43,7 +42,7 @@ public class ListMoviesActionTest {
         IOHarness harness = new IOHarness();
         Library mockLib = mock(Library.class);
         List<Movie> movies = ItemFactoryTest.createFakeMovies();
-        ListMoviesAction action = new ListMoviesAction(mockLib, harness.createTestIO(""));
+        ListMoviesAction action = new ListMoviesAction(harness.createTestIO(""), mockLib);
         when(mockLib.getMovieList()).thenReturn(movies);
         action.execute();
 

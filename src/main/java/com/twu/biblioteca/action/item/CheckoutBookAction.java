@@ -9,8 +9,8 @@ import java.util.List;
 public class CheckoutBookAction extends CheckoutItemAction {
 
 
-    public CheckoutBookAction(Library lib, IO io) {
-        super(lib, io);
+    public CheckoutBookAction(IO io, Library lib) {
+        super(io, lib);
     }
 
     @Override

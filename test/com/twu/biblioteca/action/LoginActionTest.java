@@ -3,11 +3,9 @@ package com.twu.biblioteca.action;
 import com.twu.biblioteca.BibliotecaApp;
 import com.twu.biblioteca.account.Registry;
 import com.twu.biblioteca.account.User;
-import com.twu.biblioteca.action.item.CheckoutBookAction;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.util.NoSuchElementException;
 
@@ -26,7 +24,7 @@ public class LoginActionTest {
         IO io = harness.createTestIO("111-1111");
         BibliotecaApp app = new BibliotecaApp(io);
         Registry mockReg = mock(Registry.class);
-        LoginAction action = new LoginAction(app, io, mockReg, app);
+        LoginAction action = new LoginAction(io, mockReg, app);
         try {
             action.execute();
         } catch (NoSuchElementException e) {
@@ -41,7 +39,7 @@ public class LoginActionTest {
         IO io = harness.createTestIO("123-4567\nmypassword");
         BibliotecaApp app = new BibliotecaApp(io);
 
-        LoginAction action = new LoginAction(app, io, createMockReg(), app);
+        LoginAction action = new LoginAction(io, createMockReg(), app);
         action.execute();
 
         assertThat(harness.getOutput(), (containsString("Login successful")));
@@ -55,7 +53,7 @@ public class LoginActionTest {
         IO io = harness.createTestIO("123-4567\nincorrectpassword");
         BibliotecaApp app = new BibliotecaApp(io);
 
-        LoginAction action = new LoginAction(app, io, createMockReg(), app);
+        LoginAction action = new LoginAction(io, createMockReg(), app);
         action.execute();
 
         assertThat(harness.getOutput(), (containsString("Login failed")));
@@ -67,7 +65,7 @@ public class LoginActionTest {
         IO io = harness.createTestIO("123-9999\nincorrectpassword");
         BibliotecaApp app = new BibliotecaApp(io);
 
-        LoginAction action = new LoginAction(app, io, createMockReg(), app);
+        LoginAction action = new LoginAction(io, createMockReg(), app);
         action.execute();
 
         assertThat(harness.getOutput(), (containsString("Login failed")));

@@ -2,7 +2,6 @@ package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.BibliotecaApp;
 import com.twu.biblioteca.ItemFactoryTest;
-import com.twu.biblioteca.action.item.CheckoutMovieAction;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
 import com.twu.biblioteca.item.Movie;
@@ -23,7 +22,7 @@ public class CheckoutMovieActionTest {
         IOHarness harness = new IOHarness();
         IO io = harness.createTestIO("");
         BibliotecaApp app = new BibliotecaApp(io);
-        CheckoutMovieAction action = new CheckoutMovieAction(app, io);
+        CheckoutMovieAction action = new CheckoutMovieAction(io, app);
         try {
             action.execute();
         } catch (NoSuchElementException e) {
@@ -36,7 +35,7 @@ public class CheckoutMovieActionTest {
         IOHarness harness = new IOHarness();
         IO io = harness.createTestIO(ItemFactoryTest.WHIPLASH_TITLE);
         BibliotecaApp app = new BibliotecaApp(io);
-        CheckoutMovieAction action = new CheckoutMovieAction(app, io);
+        CheckoutMovieAction action = new CheckoutMovieAction(io, app);
         action.execute();
 
         assertThat(harness.getOutput(), (containsString("Thank you! Enjoy the movie")));
@@ -51,7 +50,7 @@ public class CheckoutMovieActionTest {
         Movie testMovie = MovieList.get(1);
         assertThat(testMovie.isAvailable(), is(true));
 
-        CheckoutMovieAction action = new CheckoutMovieAction(app, io);
+        CheckoutMovieAction action = new CheckoutMovieAction(io, app);
         action.execute();
 
         assertThat(testMovie.isAvailable(), is(false));
@@ -63,7 +62,7 @@ public class CheckoutMovieActionTest {
         IO io = harness.createTestIO(ItemFactoryTest.WHIPLASH_TITLE);
         BibliotecaApp app = new BibliotecaApp(io);
         app.getMovieList().get(1).setAvailable(false);
-        CheckoutMovieAction action = new CheckoutMovieAction(app, io);
+        CheckoutMovieAction action = new CheckoutMovieAction(io, app);
         action.execute();
 
         assertThat(harness.getOutput(), (containsString("Sorry, that movie is not available")));
@@ -76,7 +75,7 @@ public class CheckoutMovieActionTest {
         IO io = harness.createTestIO("Non-existent Movie");
         BibliotecaApp app = new BibliotecaApp(io);
 
-        CheckoutMovieAction action = new CheckoutMovieAction(app, io);
+        CheckoutMovieAction action = new CheckoutMovieAction(io, app);
         action.execute();
 
         assertThat(harness.getOutput(), (containsString("Sorry, that movie is not available")));

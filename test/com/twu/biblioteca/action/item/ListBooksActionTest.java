@@ -1,7 +1,6 @@
 package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.ItemFactoryTest;
-import com.twu.biblioteca.action.item.ListBooksAction;
 import com.twu.biblioteca.item.Book;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IOHarness;
@@ -22,7 +21,7 @@ public class ListBooksActionTest {
         IOHarness harness = new IOHarness();
         Library mockLib = mock(Library.class);
         when(mockLib.getBookList()).thenReturn(ItemFactoryTest.createFakeBooks());
-        ListBooksAction listBooksAction = new ListBooksAction(mockLib, harness.createTestIO(""));
+        ListBooksAction listBooksAction = new ListBooksAction(harness.createTestIO(""), mockLib);
         listBooksAction.execute();
 
         assertThat(harness.getOutput(), containsString("Test Book | Foo Bar | 999\n" + "Another One | Rubber Ducky | 1\n"));
@@ -36,7 +35,7 @@ public class ListBooksActionTest {
         List<Book> books = ItemFactoryTest.createFakeBooks();
         books.get(0).setAvailable(false);
         when(mockLib.getBookList()).thenReturn(books);
-        ListBooksAction listBooksAction = new ListBooksAction(mockLib, harness.createTestIO(""));
+        ListBooksAction listBooksAction = new ListBooksAction(harness.createTestIO(""), mockLib);
         listBooksAction.execute();
 
         assertThat(harness.getOutput(), containsString("Another One | Rubber Ducky | 1\n"));

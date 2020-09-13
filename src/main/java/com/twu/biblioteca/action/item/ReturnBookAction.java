@@ -11,8 +11,11 @@ public class ReturnBookAction extends Action {
     private static final String FAIL_MSG = "That is not a valid book to return.\n";
     private static final String PROMPT = "Enter a book title to return:";
 
-    public ReturnBookAction(Library lib, IO io) {
-        super(lib, io);
+    private Library lib;
+
+    public ReturnBookAction(IO io, Library lib) {
+        super(io);
+        this.lib = lib;
         this.access = Access.RESTRICTED;
     }
 

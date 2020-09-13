@@ -13,8 +13,11 @@ public abstract class CheckoutItemAction extends Action {
     private static final String PROMPT = "Enter a %s title to checkout:";
     private static final String FAIL_MSG = "Sorry, that %s is not available";
 
-    public CheckoutItemAction(Library lib, IO io) {
-        super(lib, io);
+    Library lib;
+
+    public CheckoutItemAction(IO io, Library lib) {
+        super(io);
+        this.lib = lib;
         this.access = Access.RESTRICTED;
     }
 

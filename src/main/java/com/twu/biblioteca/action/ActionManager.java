@@ -14,6 +14,7 @@ import java.util.Map;
 public class ActionManager {
 
     private static final String INVALID_PROMPT = "Please select a valid option!";
+
     private Library lib;
     private Application app;
     private IO io;
@@ -21,7 +22,7 @@ public class ActionManager {
     private List<Action> actions = new LinkedList<>();
     private Map<Integer, Action> availableActions = new HashMap<>();
 
-    public ActionManager(Library lib, IO io, Application app, Registry reg) {
+    public ActionManager(IO io, Library lib, Registry reg, Application app) {
         this.io = io;
         this.lib = lib;
         this.app = app;
@@ -52,13 +53,13 @@ public class ActionManager {
     }
 
     private void createActions() {
-        actions.add(new LoginAction(lib, io, reg, app));
-        actions.add(new ListBooksAction(lib, io));
-        actions.add(new CheckoutBookAction(lib, io));
-        actions.add(new ReturnBookAction(lib, io));
-        actions.add(new ListMoviesAction(lib, io));
-        actions.add(new CheckoutMovieAction(lib, io));
-        actions.add(new QuitAction(lib, io, app));
+        actions.add(new LoginAction(io, reg, app));
+        actions.add(new ListBooksAction(io, lib));
+        actions.add(new CheckoutBookAction(io, lib));
+        actions.add(new ReturnBookAction(io, lib));
+        actions.add(new ListMoviesAction(io, lib));
+        actions.add(new CheckoutMovieAction(io, lib));
+        actions.add(new QuitAction(io, app));
     }
 
     private void displayMenu() {

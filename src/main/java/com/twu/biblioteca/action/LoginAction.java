@@ -1,7 +1,6 @@
 package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.Application;
-import com.twu.biblioteca.Library;
 import com.twu.biblioteca.account.Registry;
 import com.twu.biblioteca.account.User;
 import com.twu.biblioteca.io.IO;
@@ -15,8 +14,8 @@ public class LoginAction extends Action {
     private Registry registry;
     private Application app;
 
-    public LoginAction(Library lib, IO io, Registry registry, Application app) {
-        super(lib, io);
+    public LoginAction(IO io, Registry registry, Application app) {
+        super(io);
         this.registry = registry;
         this.app = app;
         this.access = Access.PUBLIC_ONLY;

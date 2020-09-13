@@ -8,7 +8,6 @@ import com.twu.biblioteca.io.IOHarness;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.containsString;
@@ -30,7 +29,7 @@ public class ActionManagerTest {
 
     public void start(String input) {
         IO mockIO = ioHarness.createTestIO(input);
-        am = new ActionManager(mockApp, mockIO, mockApp, mockReg);
+        am = new ActionManager(mockIO, mockApp, mockReg, mockApp);
         try {
             am.start();
         } catch (NoSuchElementException e) {

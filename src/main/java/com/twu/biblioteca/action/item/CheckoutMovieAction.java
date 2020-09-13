@@ -8,8 +8,8 @@ import java.util.List;
 
 public class CheckoutMovieAction extends  CheckoutItemAction {
 
-    public CheckoutMovieAction(Library lib, IO io) {
-        super(lib, io);
+    public CheckoutMovieAction(IO io, Library lib) {
+        super(io, lib);
     }
 
     @Override

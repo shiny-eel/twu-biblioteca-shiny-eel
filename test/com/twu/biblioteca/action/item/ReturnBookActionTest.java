@@ -1,7 +1,6 @@
 package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.BibliotecaApp;
-import com.twu.biblioteca.action.item.ReturnBookAction;
 import com.twu.biblioteca.item.Book;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
@@ -23,7 +22,7 @@ public class ReturnBookActionTest {
         IOHarness harness = new IOHarness();
         IO io = harness.createTestIO("");
         Library mockLib = mock(Library.class);
-        ReturnBookAction action = new ReturnBookAction(mockLib, io);
+        ReturnBookAction action = new ReturnBookAction(io, mockLib);
         try {
             action.execute();
         } catch (NoSuchElementException e) {
@@ -42,7 +41,7 @@ public class ReturnBookActionTest {
         Book testBook = bookList.get(2);
         testBook.setAvailable(false);
 
-        ReturnBookAction action = new ReturnBookAction(app, io);
+        ReturnBookAction action = new ReturnBookAction(io, app);
         action.execute();
         assertThat(harness.getOutput(), containsString("Thank you for returning the book\n"));
     }
@@ -53,7 +52,7 @@ public class ReturnBookActionTest {
         IO io = harness.createTestIO("Invalid Book");
         BibliotecaApp app = new BibliotecaApp(io);
 
-        ReturnBookAction action = new ReturnBookAction(app, io);
+        ReturnBookAction action = new ReturnBookAction(io, app);
         action.execute();
         assertThat(harness.getOutput(), containsString("That is not a valid book to return.\n"));
     }
@@ -68,7 +67,7 @@ public class ReturnBookActionTest {
         Book testBook = bookList.get(1);
         testBook.setAvailable(false);
 
-        ReturnBookAction action = new ReturnBookAction(app, io);
+        ReturnBookAction action = new ReturnBookAction(io, app);
         action.execute();
 
         assertThat(testBook.isAvailable(), is(true));
@@ -85,7 +84,7 @@ public class ReturnBookActionTest {
         Book testBook = bookList.get(1);
         testBook.setAvailable(true);
 
-        ReturnBookAction action = new ReturnBookAction(app, io);
+        ReturnBookAction action = new ReturnBookAction(io, app);
         action.execute();
 
         assertThat(testBook.isAvailable(), is(true));

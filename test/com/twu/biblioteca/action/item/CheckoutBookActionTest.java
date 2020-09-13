@@ -1,7 +1,6 @@
 package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.BibliotecaApp;
-import com.twu.biblioteca.action.item.CheckoutBookAction;
 import com.twu.biblioteca.item.Book;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
@@ -23,7 +22,7 @@ public class CheckoutBookActionTest {
         IOHarness harness = new IOHarness();
         IO io = harness.createTestIO("Art of War");
         BibliotecaApp app = new BibliotecaApp(io);
-        CheckoutBookAction action = new CheckoutBookAction(app, io);
+        CheckoutBookAction action = new CheckoutBookAction(io, app);
         action.execute();
 
         assertThat(harness.getOutput(), (containsString("Thank you! Enjoy the book")));
@@ -34,7 +33,7 @@ public class CheckoutBookActionTest {
         IOHarness harness = new IOHarness();
         IO io = harness.createTestIO("");
         BibliotecaApp app = new BibliotecaApp(io);
-        CheckoutBookAction action = new CheckoutBookAction(app, io);
+        CheckoutBookAction action = new CheckoutBookAction(io, app);
         try {
             action.execute();
         } catch (NoSuchElementException e) {
@@ -51,7 +50,7 @@ public class CheckoutBookActionTest {
         Book testBook = bookList.get(1);
         assertThat(testBook.isAvailable(), is(true));
 
-        CheckoutBookAction action = new CheckoutBookAction(app, io);
+        CheckoutBookAction action = new CheckoutBookAction(io, app);
         action.execute();
 
         assertThat(testBook.isAvailable(), is(false));
@@ -63,7 +62,7 @@ public class CheckoutBookActionTest {
         IO io = harness.createTestIO("Infinite Jest");
         BibliotecaApp app = new BibliotecaApp(io);
         app.getBookList().get(1).setAvailable(false);
-        CheckoutBookAction action = new CheckoutBookAction(app, io);
+        CheckoutBookAction action = new CheckoutBookAction(io, app);
         action.execute();
 
         assertThat(harness.getOutput(), (containsString("Sorry, that book is not available")));
@@ -76,7 +75,7 @@ public class CheckoutBookActionTest {
         IO io = harness.createTestIO("Non-existent book");
         BibliotecaApp app = new BibliotecaApp(io);
 
-        CheckoutBookAction action = new CheckoutBookAction(app, io);
+        CheckoutBookAction action = new CheckoutBookAction(io, app);
         action.execute();
 
         assertThat(harness.getOutput(), (containsString("Sorry, that book is not available")));

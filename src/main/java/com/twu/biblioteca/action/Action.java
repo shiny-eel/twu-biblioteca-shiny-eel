@@ -1,11 +1,9 @@
 package com.twu.biblioteca.action;
 
-import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
 
 public abstract class Action {
 
-    protected Library lib;
     protected IO io;
 
     protected enum Access {
@@ -14,8 +12,7 @@ public abstract class Action {
 
     protected Access access = Access.PUBLIC;
 
-    public Action(Library lib, IO io) {
-        this.lib = lib;
+    public Action(IO io) {
         this.io = io;
 
     }

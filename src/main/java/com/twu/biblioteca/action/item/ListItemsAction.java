@@ -10,9 +10,11 @@ import java.util.List;
 public abstract class ListItemsAction extends Action {
 
     private static final String SEPARATOR = "--------------------";
+    Library lib;
 
-    public ListItemsAction(Library lib, IO io) {
-        super(lib, io);
+    public ListItemsAction(IO io, Library lib) {
+        super(io);
+        this.lib = lib;
     }
 
     abstract List<? extends Item> getItems();
