@@ -55,7 +55,8 @@ public class ActionManagerTest {
                 + "3. Return a book\n"
                 + "4. List of movies\n"
                 + "5. Checkout a movie\n"
-                + "6. Quit";
+                + "6. View user information\n"
+                + "7. Quit";
         assertThat(ioHarness.getOutput(), containsString(expected));
     }
 
@@ -68,13 +69,6 @@ public class ActionManagerTest {
      + "6. Quit";
      */
 
-    @Test
-    public void testSelectListBooks() {
-        when(mockApp.isLoggedIn()).thenReturn(true);
-        start("1");
-        String expected = "Test Book | Foo Bar | 999\n" + "Another One | Rubber Ducky | 1";
-        assertThat(ioHarness.getOutput(), containsString(expected));
-    }
 
     @Test
     public void testInvalidOptionSelect() {
@@ -87,7 +81,7 @@ public class ActionManagerTest {
     @Test
     public void testQuitOptionSelect() {
         when(mockApp.isLoggedIn()).thenReturn(true);
-        start("6"); // Assuming 6 is the quit option
+        start("7"); // Assuming 6 is the quit option
         verify(mockApp).quit();
     }
 

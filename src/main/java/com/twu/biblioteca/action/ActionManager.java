@@ -59,6 +59,7 @@ public class ActionManager {
         actions.add(new ReturnBookAction(io, lib));
         actions.add(new ListMoviesAction(io, lib));
         actions.add(new CheckoutMovieAction(io, lib));
+        actions.add(new ViewInfoAction(io, app));
         actions.add(new QuitAction(io, app));
     }
 
@@ -69,9 +70,8 @@ public class ActionManager {
         int id = 1;
         for (Action action : actions) {
             if (isLoggedIn && action.access == Action.Access.PUBLIC_ONLY)
-                continue;
+                continue; // Do not allow another login
             if (isLoggedIn | action.access != Action.Access.RESTRICTED) {
-
                 availableActions.put(id, action);
                 io.println(id + ". " + action.getTitle());
                 id++;

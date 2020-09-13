@@ -9,8 +9,8 @@ public class RegistryTest {
 
     @Test
     public void testGetUserAInfo()  {
-        String id = "529-8334";
-        String pass = "allblack99";
+        String id = "111-2222";
+        String pass = "allblack";
         String name = "Tana Umaga";
         Registry reg = new Registry();
         User u = reg.getUser(id);

@@ -16,10 +16,13 @@ public class Registry {
     }
 
     private void createUsers() {
-        User u = new User("Tana Umaga", "529-8334", "allblack99");
+        User u = new User("Tana Umaga", "111-2222", "allblack");
+        u.setDetails("runstraight@tmail.com", "123 45678");
         userMap.put(u.getLibraryNum(), u);
 
         u = new User("Rangi Heke", "126-0053", "matariki");
+        u.setDetails("taonga@bmail.com", "888 5555");
+
         userMap.put(u.getLibraryNum(), u);
     }
 

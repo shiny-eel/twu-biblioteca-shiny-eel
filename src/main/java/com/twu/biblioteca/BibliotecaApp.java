@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.account.Registry;
+import com.twu.biblioteca.account.User;
 import com.twu.biblioteca.action.ActionManager;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.item.Book;
@@ -11,16 +12,15 @@ import java.util.List;
 
 public class BibliotecaApp implements Library, Application {
 
-    private boolean isLoggedIn;
+    ActionManager actionManager;
+    private User currentUser;
     private IO io;
     private List<Movie> movieList;
     private List<Book> bookList;
-    ActionManager actionManager;
     private Registry registry;
 
     public BibliotecaApp(IO io) {
         this.io = io;
-        this.isLoggedIn = false;
         ItemFactory itemFactory = new ItemFactory();
         movieList = itemFactory.getMovieList();
         bookList = itemFactory.getBookList();
@@ -38,7 +38,8 @@ public class BibliotecaApp implements Library, Application {
     public List<Book> getBookList() {
         return bookList;
     }
-    
+
+
     @Override
     public List<Movie> getMovieList() {
         return movieList;
@@ -50,12 +51,17 @@ public class BibliotecaApp implements Library, Application {
     }
 
     @Override
-    public void logIn() {
-        isLoggedIn = true;
+    public void logIn(User user) {
+        currentUser = user;
     }
 
     @Override
     public boolean isLoggedIn() {
-        return isLoggedIn;
+        return currentUser != null;
+    }
+
+    @Override
+    public User getCurrentUser() {
+        return currentUser;
     }
 }
