@@ -2,6 +2,7 @@ package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.BibliotecaApp;
 import com.twu.biblioteca.ItemFactoryTest;
+import com.twu.biblioteca.account.Registry;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
 import org.junit.Before;
@@ -17,17 +18,19 @@ import static org.mockito.Mockito.*;
 public class ActionManagerTest {
     private ActionManager am;
     private BibliotecaApp mockApp;
+    private Registry mockReg;
     private IOHarness ioHarness = new IOHarness();
 
     @Before
     public void setUp() throws Exception {
         mockApp = mock(BibliotecaApp.class);
+        mockReg = mock(Registry.class);
         when(mockApp.getBookList()).thenReturn(ItemFactoryTest.createFakeBooks());
     }
 
     public void start(String input) {
         IO mockIO = ioHarness.createTestIO(input);
-        am = new ActionManager(mockApp, mockIO, mockApp);
+        am = new ActionManager(mockApp, mockIO, mockApp, mockReg);
         try {
             am.start();
         } catch (NoSuchElementException e) {
@@ -35,7 +38,7 @@ public class ActionManagerTest {
     }
 
     @Test
-    public void testMenuDisplayOptions() {
+    public void testMenuDisplayOptions() { // Accounting for being logged off
         start("");
         String expected = "1. Login\n"
                 + "2. List of books\n"

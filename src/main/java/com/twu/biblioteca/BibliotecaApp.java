@@ -9,7 +9,7 @@ import com.twu.biblioteca.item.Movie;
 
 import java.util.List;
 
-public class BibliotecaApp implements Library, Application, Personal {
+public class BibliotecaApp implements Library, Application {
 
     protected IO io;
     private List<Movie> movieList;
@@ -27,7 +27,7 @@ public class BibliotecaApp implements Library, Application, Personal {
 
     public void initialise() {
         io.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
-        actionManager = new ActionManager(this, io, this);
+        actionManager = new ActionManager(this, io, this, registry);
         actionManager.start();
     }
 
@@ -54,7 +54,12 @@ public class BibliotecaApp implements Library, Application, Personal {
 //    }
 
     @Override
-    public boolean isLoggedOn() {
+    public void logIn() {
+
+    }
+
+    @Override
+    public boolean isLoggedIn() {
         return false;
     }
 }

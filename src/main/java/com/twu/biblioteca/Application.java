@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 public interface Application {
 
-    boolean isLoggedOn();
+    void logIn();
+    boolean isLoggedIn();
     void quit();
 }
