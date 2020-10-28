@@ -53,6 +53,7 @@ public class ActionManager {
 
     private void createActions() {
         actions.add(new LoginAction(io, reg, app));
+        actions.add(new ListCheckedOutItemsAction(io, lib, app));
         actions.add(new ListBooksAction(io, lib));
         actions.add(new CheckoutBookAction(io, lib, app));
         actions.add(new ReturnBookAction(io, lib));

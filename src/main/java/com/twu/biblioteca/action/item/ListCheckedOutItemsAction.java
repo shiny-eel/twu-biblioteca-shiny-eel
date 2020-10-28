@@ -38,7 +38,6 @@ public class ListCheckedOutItemsAction extends ListItemsAction {
 
     @Override
     protected String getTitle() {
-        return null;
-//        return "List checked-out items";
+        return "List your checked out items";
     }
 }
