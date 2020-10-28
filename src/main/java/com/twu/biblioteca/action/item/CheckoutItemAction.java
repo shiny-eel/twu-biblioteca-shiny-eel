@@ -1,5 +1,6 @@
 package com.twu.biblioteca.action.item;
 
+import com.twu.biblioteca.Application;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.action.Action;
 import com.twu.biblioteca.io.IO;
@@ -14,11 +15,13 @@ public abstract class CheckoutItemAction extends Action {
     private static final String FAIL_MSG = "Sorry, that %s is not available";
 
     Library lib;
+    Application app;
 
-    public CheckoutItemAction(IO io, Library lib) {
+    public CheckoutItemAction(IO io, Library lib, Application app) {
         super(io);
         this.lib = lib;
         this.access = Access.RESTRICTED;
+        this.app = app;
     }
 
     abstract List<? extends Item> getItems();
@@ -35,7 +38,7 @@ public abstract class CheckoutItemAction extends Action {
         for (Item item : getItems()) {
             if (requestTitle.matches(item.getTitle().toLowerCase())) {
                 if (item.isAvailable()) {
-                    item.setAvailable(false);
+                    item.borrow(app.getCurrentUser());
                     io.println(String.format(SUCCESS_MSG, itemType));
                     return;
 

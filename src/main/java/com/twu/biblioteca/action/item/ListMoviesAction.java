@@ -4,6 +4,7 @@ import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.item.Item;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class ListMoviesAction extends ListItemsAction {
@@ -19,7 +20,9 @@ public class ListMoviesAction extends ListItemsAction {
     }
 
     @Override
-    List<? extends Item> getItems() {
-        return lib.getMovieList();
+    List<Item> getItems() {
+        List<Item> itemList = new LinkedList<>();
+        itemList.addAll(lib.getMovieList());
+        return itemList;
     }
 }

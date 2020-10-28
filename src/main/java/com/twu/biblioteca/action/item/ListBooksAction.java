@@ -4,6 +4,7 @@ import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.item.Item;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class ListBooksAction extends ListItemsAction {
@@ -19,8 +20,10 @@ public class ListBooksAction extends ListItemsAction {
     }
 
     @Override
-    List<? extends Item> getItems() {
-        return lib.getBookList();
+    List<Item> getItems() {
+        List<Item> itemList = new LinkedList<>();
+        itemList.addAll(lib.getBookList());
+        return itemList;
     }
 
 }

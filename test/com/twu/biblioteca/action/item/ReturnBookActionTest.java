@@ -1,6 +1,7 @@
 package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.BibliotecaApp;
+import com.twu.biblioteca.account.User;
 import com.twu.biblioteca.item.Book;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IO;
@@ -39,7 +40,7 @@ public class ReturnBookActionTest {
 
         List<Book> bookList = app.getBookList();
         Book testBook = bookList.get(2);
-        testBook.setAvailable(false);
+        testBook.borrow(mock(User.class));
 
         ReturnBookAction action = new ReturnBookAction(io, app);
         action.execute();
@@ -65,7 +66,7 @@ public class ReturnBookActionTest {
 
         List<Book> bookList = app.getBookList();
         Book testBook = bookList.get(1);
-        testBook.setAvailable(false);
+        testBook.borrow(mock(User.class));
 
         ReturnBookAction action = new ReturnBookAction(io, app);
         action.execute();
@@ -82,7 +83,7 @@ public class ReturnBookActionTest {
 
         List<Book> bookList = app.getBookList();
         Book testBook = bookList.get(1);
-        testBook.setAvailable(true);
+//        testBook.setAvailable(true);
 
         ReturnBookAction action = new ReturnBookAction(io, app);
         action.execute();

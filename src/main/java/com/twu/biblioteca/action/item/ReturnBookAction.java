@@ -32,7 +32,7 @@ public class ReturnBookAction extends Action {
         for (Book book : lib.getBookList()) {
             if (bookTitle.matches(book.getTitle().toLowerCase())) {
                 if (!book.isAvailable()) {
-                    book.setAvailable(true);
+                    book.returnItem();
                     io.println(SUCCESS_MSG);
                     return;
                 }

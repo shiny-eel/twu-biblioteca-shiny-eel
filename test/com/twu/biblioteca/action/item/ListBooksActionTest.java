@@ -1,6 +1,7 @@
 package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.ItemFactoryTest;
+import com.twu.biblioteca.account.User;
 import com.twu.biblioteca.item.Book;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IOHarness;
@@ -33,7 +34,7 @@ public class ListBooksActionTest {
         IOHarness harness = new IOHarness();
         Library mockLib = mock(Library.class);
         List<Book> books = ItemFactoryTest.createFakeBooks();
-        books.get(0).setAvailable(false);
+        books.get(0).borrow(mock(User.class));
         when(mockLib.getBookList()).thenReturn(books);
         ListBooksAction listBooksAction = new ListBooksAction(harness.createTestIO(""), mockLib);
         listBooksAction.execute();

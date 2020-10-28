@@ -1,16 +1,25 @@
 package com.twu.biblioteca.item;
 
+import com.twu.biblioteca.account.User;
+
 public abstract class Item {
     protected int year;
     protected String creator;
     private String title;
-    private boolean isAvailable;
+    private User borrower;
 
     public Item(String title, String creator, int year) {
         this.title = title;
         this.year = year;
         this.creator = creator;
-        isAvailable = true;
+    }
+
+    public void borrow(User borrower) {
+        this.borrower = borrower;
+    }
+
+    public void returnItem(){
+        this.borrower = null;
     }
 
     public String getCreator() {
@@ -26,12 +35,9 @@ public abstract class Item {
     }
 
     public boolean isAvailable() {
-        return isAvailable;
+        return borrower == null;
     }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
+    public User getBorrower() { return borrower; }
 
     @Override
     public String toString() {

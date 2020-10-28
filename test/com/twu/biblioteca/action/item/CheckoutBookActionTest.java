@@ -1,6 +1,7 @@
 package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.BibliotecaApp;
+import com.twu.biblioteca.account.User;
 import com.twu.biblioteca.item.Book;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
@@ -12,6 +13,7 @@ import java.util.NoSuchElementException;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class CheckoutBookActionTest {
 
@@ -22,7 +24,7 @@ public class CheckoutBookActionTest {
         IOHarness harness = new IOHarness();
         IO io = harness.createTestIO("Art of War");
         BibliotecaApp app = new BibliotecaApp(io);
-        CheckoutBookAction action = new CheckoutBookAction(io, app);
+        CheckoutBookAction action = new CheckoutBookAction(io, app, app);
         action.execute();
 
         assertThat(harness.getOutput(), (containsString("Thank you! Enjoy the book")));
@@ -33,7 +35,7 @@ public class CheckoutBookActionTest {
         IOHarness harness = new IOHarness();
         IO io = harness.createTestIO("");
         BibliotecaApp app = new BibliotecaApp(io);
-        CheckoutBookAction action = new CheckoutBookAction(io, app);
+        CheckoutBookAction action = new CheckoutBookAction(io, app, app);
         try {
             action.execute();
         } catch (NoSuchElementException e) {
@@ -46,11 +48,12 @@ public class CheckoutBookActionTest {
         IOHarness harness = new IOHarness();
         IO io = harness.createTestIO("Infinite Jest");
         BibliotecaApp app = new BibliotecaApp(io);
+        app.logIn(mock(User.class));
         List<Book> bookList = app.getBookList();
         Book testBook = bookList.get(1);
         assertThat(testBook.isAvailable(), is(true));
 
-        CheckoutBookAction action = new CheckoutBookAction(io, app);
+        CheckoutBookAction action = new CheckoutBookAction(io, app, app);
         action.execute();
 
         assertThat(testBook.isAvailable(), is(false));
@@ -61,8 +64,8 @@ public class CheckoutBookActionTest {
         IOHarness harness = new IOHarness();
         IO io = harness.createTestIO("Infinite Jest");
         BibliotecaApp app = new BibliotecaApp(io);
-        app.getBookList().get(1).setAvailable(false);
-        CheckoutBookAction action = new CheckoutBookAction(io, app);
+        app.getBookList().get(1).borrow(mock(User.class));
+        CheckoutBookAction action = new CheckoutBookAction(io, app, app);
         action.execute();
 
         assertThat(harness.getOutput(), (containsString("Sorry, that book is not available")));
@@ -75,7 +78,7 @@ public class CheckoutBookActionTest {
         IO io = harness.createTestIO("Non-existent book");
         BibliotecaApp app = new BibliotecaApp(io);
 
-        CheckoutBookAction action = new CheckoutBookAction(io, app);
+        CheckoutBookAction action = new CheckoutBookAction(io, app, app);
         action.execute();
 
         assertThat(harness.getOutput(), (containsString("Sorry, that book is not available")));

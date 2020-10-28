@@ -33,7 +33,6 @@ public class ActionManager {
     public void start() {
         createActions();
         while (true) { // Infinite loop for CLI menu
-
             displayMenu();
             String input = io.getInput();
             int id;
@@ -55,10 +54,10 @@ public class ActionManager {
     private void createActions() {
         actions.add(new LoginAction(io, reg, app));
         actions.add(new ListBooksAction(io, lib));
-        actions.add(new CheckoutBookAction(io, lib));
+        actions.add(new CheckoutBookAction(io, lib, app));
         actions.add(new ReturnBookAction(io, lib));
         actions.add(new ListMoviesAction(io, lib));
-        actions.add(new CheckoutMovieAction(io, lib));
+        actions.add(new CheckoutMovieAction(io, lib, app));
         actions.add(new ViewInfoAction(io, app));
         actions.add(new QuitAction(io, app));
     }
