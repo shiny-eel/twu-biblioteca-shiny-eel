@@ -25,7 +25,9 @@ public class ListBooksActionTest {
         ListBooksAction listBooksAction = new ListBooksAction(harness.createTestIO(""), mockLib);
         listBooksAction.execute();
 
-        assertThat(harness.getOutput(), containsString("Test Book | Foo Bar | 999\n" + "Another One | Rubber Ducky | 1\n"));
+        assertThat(harness.getOutput(), containsString(
+                "Test Book             | Foo Bar               |  999\n" +
+                "Another One           | Rubber Ducky          |    1\n"));
 
     }
 
@@ -39,8 +41,9 @@ public class ListBooksActionTest {
         ListBooksAction listBooksAction = new ListBooksAction(harness.createTestIO(""), mockLib);
         listBooksAction.execute();
 
-        assertThat(harness.getOutput(), containsString("Another One | Rubber Ducky | 1\n"));
-        assertThat(harness.getOutput(), not(containsString("Test Book | Foo Bar | 999\n")));
+        assertThat(harness.getOutput(), containsString(
+                "Another One           | Rubber Ducky          |    1\n"));
+        assertThat(harness.getOutput(), not(containsString("Test Book")));
 
 
     }

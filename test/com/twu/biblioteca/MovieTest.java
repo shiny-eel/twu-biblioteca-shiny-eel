@@ -11,7 +11,7 @@ public class MovieTest {
     @Test
     public void testToString() {
         Movie movie = new Movie("A", "B", 2000);
-        assertThat(movie.toString(), is("A | B | 2000 | unrated"));
+        assertThat(movie.toString(), is("A                     | B                     | 2000 | unrated"));
 
     }
 }

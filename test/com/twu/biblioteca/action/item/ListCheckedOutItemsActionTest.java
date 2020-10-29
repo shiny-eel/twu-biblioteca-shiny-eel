@@ -53,7 +53,7 @@ public class ListCheckedOutItemsActionTest {
         ListCheckedOutItemsAction action = new ListCheckedOutItemsAction(io, app, app);
         action.execute();
 
-        assertThat(ioHarness.getOutput(), containsString("Test Book | Foo Bar | 999\n"));
+        assertThat(ioHarness.getOutput(), containsString("Test Book"));
 
     }
 
@@ -71,8 +71,8 @@ public class ListCheckedOutItemsActionTest {
         ListCheckedOutItemsAction action = new ListCheckedOutItemsAction(io, app, app);
         action.execute();
 
-        assertThat(ioHarness.getOutput(), containsString("Test Book | Foo Bar | 999\n"));
-        assertThat(ioHarness.getOutput(), containsString("Hello | World | 1 | 5\n"));
+        assertThat(ioHarness.getOutput(), containsString("Test Book"));
+        assertThat(ioHarness.getOutput(), containsString("Hello"));
 
     }
 

@@ -46,7 +46,8 @@ public class ListMoviesActionTest {
         when(mockLib.getMovieList()).thenReturn(movies);
         action.execute();
 
-        String expected = "Test | Foo Bar | 999 | unrated\n" + "Hello | World | 1 | 5\n";
+        String expected = "Test                  | Foo Bar               |  999 | unrated\n" +
+                "Hello                 | World                 |    1 | 5";
         assertThat(harness.getOutput(), containsString(expected));
 
     }
