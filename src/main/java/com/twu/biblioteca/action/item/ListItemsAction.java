@@ -9,7 +9,7 @@ import java.util.List;
 
 public abstract class ListItemsAction extends Action {
 
-    private static final String SEPARATOR = "---------------------------------------------------------------------";
+    protected static final String SEPARATOR = "---------------------------------------------------------------------";
     protected static final String NO_ITEMS_MSG = "There are no items to display.";
     protected boolean ignoreUnavailable = true;
 

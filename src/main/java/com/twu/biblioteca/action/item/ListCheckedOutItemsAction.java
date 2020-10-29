@@ -2,6 +2,7 @@ package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.Application;
 import com.twu.biblioteca.Library;
+import com.twu.biblioteca.action.Action;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.item.Book;
 import com.twu.biblioteca.item.Item;
@@ -10,35 +11,59 @@ import com.twu.biblioteca.item.Movie;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ListCheckedOutItemsAction extends ListItemsAction {
+public class ListCheckedOutItemsAction extends Action {
 
     private Application app;
+    private Library lib;
+    private ListBooksAction listBooksAction;
+    private ListMoviesAction listMoviesAction;
 
     public ListCheckedOutItemsAction(IO io, Library lib, Application app) {
-        super(io, lib);
+        super(io);
+        this.lib = lib;
         this.app = app;
         this.access = Access.RESTRICTED;
-        ignoreUnavailable = false;
+    }
+
+
+    private List<Item> getFilteredItems(List<? extends Item> items) {
+        List<Item> output = new LinkedList<>();
+        for (Item item: items) {
+            if (!item.isAvailable() && item.getBorrower().equals(app.getCurrentUser()))
+                output.add(item);
+        }
+        return output;
+    }
+
+    private ListBooksAction createListBooksAction() {
+        ListBooksAction action = new ListBooksAction(io, lib){
+            @Override
+            List<Item> getItems() {
+
+                return getFilteredItems(lib.getBookList());
+            }
+        };
+        action.ignoreUnavailable = false;
+        return action;
+    }
+
+    private ListMoviesAction createListMoviesAction() {
+        ListMoviesAction action = new ListMoviesAction(io, lib){
+            @Override
+            List<Item> getItems() {
+                return getFilteredItems(lib.getMovieList());
+            }
+        };
+        action.ignoreUnavailable = false;
+        return action;
     }
 
     @Override
-    List<Item> getItems() {
-        List<Item> itemList = new LinkedList<>();
-        for (Book book: lib.getBookList()) {
-            if (!book.isAvailable() && book.getBorrower().equals(app.getCurrentUser()))
-                itemList.add(book);
-        }
-        for (Movie movie: lib.getMovieList()) {
-            if (!movie.isAvailable() && movie.getBorrower().equals(app.getCurrentUser()))
-                itemList.add(movie);
-        }
-
-        return itemList;
-    }
-
-    @Override
-    void printHeaders() {
-
+    protected void execute() {
+        listBooksAction = createListBooksAction();
+        listMoviesAction = createListMoviesAction();
+        listBooksAction.execute();
+        listMoviesAction.execute();
     }
 
     @Override
