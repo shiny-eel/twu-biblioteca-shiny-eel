@@ -42,13 +42,6 @@ public abstract class Item {
     @Override
     public String toString() {
         String output = String.format("%-20.20s  | %-20.20s  | %4d", title, creator, year);
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(title)
-//                .append(" | ")
-//                .append(creator)
-//                .append(" | ")
-//                .append(year);
-//        return sb.toString();
         return output;
     }
 }
