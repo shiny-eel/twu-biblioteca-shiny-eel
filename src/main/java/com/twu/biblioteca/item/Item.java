@@ -3,11 +3,11 @@ package com.twu.biblioteca.item;
 import com.twu.biblioteca.account.User;
 
 public abstract class Item {
+    protected static final String format = "%-20.20s  | %-20.20s  | %4s";
     protected int year;
     protected String creator;
     private String title;
     private User borrower;
-    protected static final String format = "%-20.20s  | %-20.20s  | %4s";
 
     public Item(String title, String creator, int year) {
         this.title = title;
@@ -19,7 +19,7 @@ public abstract class Item {
         this.borrower = borrower;
     }
 
-    public void returnItem(){
+    public void returnItem() {
         this.borrower = null;
     }
 
@@ -39,7 +39,9 @@ public abstract class Item {
         return borrower == null;
     }
 
-    public User getBorrower() { return borrower; }
+    public User getBorrower() {
+        return borrower;
+    }
 
     @Override
     public String toString() {

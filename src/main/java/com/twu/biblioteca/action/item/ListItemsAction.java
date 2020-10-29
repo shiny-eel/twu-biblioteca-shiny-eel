@@ -31,7 +31,7 @@ public abstract class ListItemsAction extends Action {
         printHeaders();
         io.println(SEPARATOR);
         if (items.size() < 1)
-                io.println(NO_ITEMS_MSG);
+            io.println(NO_ITEMS_MSG);
         for (Item item : items) {
             if (!ignoreUnavailable || item.isAvailable())
                 io.println(item.toString());

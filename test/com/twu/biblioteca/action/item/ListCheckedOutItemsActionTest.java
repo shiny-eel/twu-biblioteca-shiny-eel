@@ -2,19 +2,17 @@ package com.twu.biblioteca.action.item;
 
 import com.twu.biblioteca.BibliotecaApp;
 import com.twu.biblioteca.ItemFactoryTest;
-import com.twu.biblioteca.Library;
 import com.twu.biblioteca.account.User;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.io.IOHarness;
 import com.twu.biblioteca.item.Book;
-import com.twu.biblioteca.item.ItemFactory;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -22,6 +20,7 @@ public class ListCheckedOutItemsActionTest {
 
     IOHarness ioHarness;
     BibliotecaApp app;
+
     @Before
     public void setup() {
         ioHarness = new IOHarness();

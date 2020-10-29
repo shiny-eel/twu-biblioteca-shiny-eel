@@ -4,9 +4,7 @@ import com.twu.biblioteca.Application;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.action.Action;
 import com.twu.biblioteca.io.IO;
-import com.twu.biblioteca.item.Book;
 import com.twu.biblioteca.item.Item;
-import com.twu.biblioteca.item.Movie;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,7 +26,7 @@ public class ListCheckedOutItemsAction extends Action {
 
     private List<Item> getFilteredItems(List<? extends Item> items) {
         List<Item> output = new LinkedList<>();
-        for (Item item: items) {
+        for (Item item : items) {
             if (!item.isAvailable() && item.getBorrower().equals(app.getCurrentUser()))
                 output.add(item);
         }
@@ -36,7 +34,7 @@ public class ListCheckedOutItemsAction extends Action {
     }
 
     private ListBooksAction createListBooksAction() {
-        ListBooksAction action = new ListBooksAction(io, lib){
+        ListBooksAction action = new ListBooksAction(io, lib) {
             @Override
             List<Item> getItems() {
 
@@ -48,7 +46,7 @@ public class ListCheckedOutItemsAction extends Action {
     }
 
     private ListMoviesAction createListMoviesAction() {
-        ListMoviesAction action = new ListMoviesAction(io, lib){
+        ListMoviesAction action = new ListMoviesAction(io, lib) {
             @Override
             List<Item> getItems() {
                 return getFilteredItems(lib.getMovieList());

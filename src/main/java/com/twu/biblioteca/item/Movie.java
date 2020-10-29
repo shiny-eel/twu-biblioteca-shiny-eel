@@ -15,7 +15,7 @@ public class Movie extends Item {
     }
 
     public static String getHeader() {
-        String initial =  String.format(format, "Title", "Director", "Year");
+        String initial = String.format(format, "Title", "Director", "Year");
         return initial + " | Rating";
     }
 
