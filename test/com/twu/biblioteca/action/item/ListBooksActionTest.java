@@ -5,6 +5,7 @@ import com.twu.biblioteca.account.User;
 import com.twu.biblioteca.item.Book;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.io.IOHarness;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -17,12 +18,19 @@ import static org.mockito.Mockito.when;
 
 public class ListBooksActionTest {
 
+    IOHarness harness;
+    Library lib;
+
+    @Before public void setUp(){
+        harness = new IOHarness();
+        lib = mock(Library.class);
+
+    }
+
     @Test
     public void listBooksTest() {
-        IOHarness harness = new IOHarness();
-        Library mockLib = mock(Library.class);
-        when(mockLib.getBookList()).thenReturn(ItemFactoryTest.createFakeBooks());
-        ListBooksAction listBooksAction = new ListBooksAction(harness.createTestIO(""), mockLib);
+        when(lib.getBookList()).thenReturn(ItemFactoryTest.createFakeBooks());
+        ListBooksAction listBooksAction = new ListBooksAction(harness.createTestIO(""), lib);
         listBooksAction.execute();
 
         assertThat(harness.getOutput(), containsString(
@@ -32,13 +40,23 @@ public class ListBooksActionTest {
     }
 
     @Test
+    public void columnTitleTest() {
+        when(lib.getBookList()).thenReturn(ItemFactoryTest.createFakeBooks());
+        ListBooksAction listBooksAction = new ListBooksAction(harness.createTestIO(""), lib);
+        listBooksAction.execute();
+
+        assertThat(harness.getOutput(), containsString(
+                "Title                 | Author                | Year"));
+
+    }
+
+    @Test
     public void ignoreCheckedOutBookTest() {
-        IOHarness harness = new IOHarness();
-        Library mockLib = mock(Library.class);
         List<Book> books = ItemFactoryTest.createFakeBooks();
         books.get(0).borrow(mock(User.class));
-        when(mockLib.getBookList()).thenReturn(books);
-        ListBooksAction listBooksAction = new ListBooksAction(harness.createTestIO(""), mockLib);
+        when(lib.getBookList()).thenReturn(books);
+
+        ListBooksAction listBooksAction = new ListBooksAction(harness.createTestIO(""), lib);
         listBooksAction.execute();
 
         assertThat(harness.getOutput(), containsString(

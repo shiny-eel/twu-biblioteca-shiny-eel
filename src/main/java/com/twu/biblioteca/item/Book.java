@@ -6,6 +6,10 @@ public class Book extends Item {
         super(title, author, year);
     }
 
+    public static String getHeader() {
+        return String.format(format, "Title", "Author", "Year");
+    }
+
     public String getAuthor() {
         return creator;
     }

@@ -37,6 +37,11 @@ public class ListCheckedOutItemsAction extends ListItemsAction {
     }
 
     @Override
+    void printHeaders() {
+
+    }
+
+    @Override
     protected String getTitle() {
         return "List your checked out items";
     }

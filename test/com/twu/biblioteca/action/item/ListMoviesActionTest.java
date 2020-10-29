@@ -3,6 +3,7 @@ package com.twu.biblioteca.action.item;
 import com.twu.biblioteca.*;
 import com.twu.biblioteca.io.IOHarness;
 import com.twu.biblioteca.item.Movie;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -15,35 +16,54 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ListMoviesActionTest {
+    IOHarness harness;
+    Library lib;
 
+    @Before
+    public void setUp(){
+        harness = new IOHarness();
+        lib = mock(Library.class);
 
+    }
     @Test
     public void titleTest() {
-        IOHarness harness = new IOHarness();
-        Library mockLib = mock(Library.class);
+        
 
-        ListMoviesAction action = new ListMoviesAction(harness.createTestIO(""), mockLib);
+        ListMoviesAction action = new ListMoviesAction(harness.createTestIO(""), lib);
         assertThat(action.getTitle(), is("List of movies"));
     }
 
     @Test
     public void libraryCalledTest() {
-        IOHarness harness = new IOHarness();
-        Library mockLib = mock(Library.class);
-
-        ListMoviesAction action = new ListMoviesAction(harness.createTestIO(""), mockLib);
+       
+        ListMoviesAction action = new ListMoviesAction(harness.createTestIO(""), lib);
         action.execute();
 
-        verify(mockLib).getMovieList();
+        verify(lib).getMovieList();
     }
+
+
+    @Test
+    public void columnTitleTest() {
+        List<Movie> movies = ItemFactoryTest.createFakeMovies();
+        when(lib.getMovieList()).thenReturn(movies);
+
+        ListMoviesAction action = new ListMoviesAction(harness.createTestIO(""), lib);
+        action.execute();
+
+
+        assertThat(harness.getOutput(), containsString(
+                "Title                 | Director              | Year | Rating"));
+
+    }
+
 
     @Test
     public void listDisplayedTest() {
-        IOHarness harness = new IOHarness();
-        Library mockLib = mock(Library.class);
+
         List<Movie> movies = ItemFactoryTest.createFakeMovies();
-        ListMoviesAction action = new ListMoviesAction(harness.createTestIO(""), mockLib);
-        when(mockLib.getMovieList()).thenReturn(movies);
+        when(lib.getMovieList()).thenReturn(movies);
+        ListMoviesAction action = new ListMoviesAction(harness.createTestIO(""), lib);
         action.execute();
 
         String expected = "Test                  | Foo Bar               |  999 | unrated\n" +

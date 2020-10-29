@@ -7,6 +7,7 @@ public abstract class Item {
     protected String creator;
     private String title;
     private User borrower;
+    protected static final String format = "%-20.20s  | %-20.20s  | %4s";
 
     public Item(String title, String creator, int year) {
         this.title = title;
@@ -37,11 +38,12 @@ public abstract class Item {
     public boolean isAvailable() {
         return borrower == null;
     }
+
     public User getBorrower() { return borrower; }
 
     @Override
     public String toString() {
-        String output = String.format("%-20.20s  | %-20.20s  | %4d", title, creator, year);
+        String output = String.format(format, title, creator, year);
         return output;
     }
 }
