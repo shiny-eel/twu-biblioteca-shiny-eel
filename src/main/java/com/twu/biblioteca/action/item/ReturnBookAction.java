@@ -4,40 +4,27 @@ import com.twu.biblioteca.Library;
 import com.twu.biblioteca.action.Action;
 import com.twu.biblioteca.io.IO;
 import com.twu.biblioteca.item.Book;
+import com.twu.biblioteca.item.Item;
 
-public class ReturnBookAction extends Action {
+import java.util.List;
 
-    private static final String SUCCESS_MSG = "Thank you for returning the book\n";
-    private static final String FAIL_MSG = "That is not a valid book to return.\n";
-    private static final String PROMPT = "Enter a book title to return:";
+public class ReturnBookAction extends ReturnItemAction {
 
-    private Library lib;
+
 
     public ReturnBookAction(IO io, Library lib) {
-        super(io);
-        this.lib = lib;
-        this.access = Access.RESTRICTED;
+        super(io, lib);
     }
 
     @Override
-    protected String getTitle() {
-        return "Return a book";
+    List<? extends Item> getItems() {
+        return lib.getBookList();
     }
 
     @Override
-    protected void execute() {
-        io.println(PROMPT);
-        String bookTitle = io.getInput();
-        bookTitle = bookTitle.toLowerCase();
-        for (Book book : lib.getBookList()) {
-            if (bookTitle.matches(book.getTitle().toLowerCase())) {
-                if (!book.isAvailable()) {
-                    book.returnItem();
-                    io.println(SUCCESS_MSG);
-                    return;
-                }
-            }
-        }
-        io.println(FAIL_MSG);
+    String getItemType() {
+        return "book";
     }
+
+
 }
