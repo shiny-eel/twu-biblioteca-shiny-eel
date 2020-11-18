@@ -56,8 +56,9 @@ public class ActionManagerTest {
                 + "4. Return a book\n"
                 + "5. List of movies\n"
                 + "6. Checkout a movie\n"
-                + "7. View user information\n"
-                + "8. Quit";
+                + "7. Return a movie\n"
+                + "8. View user information\n"
+                + "9. Quit";
         assertThat(ioHarness.getOutput(), containsString(expected));
     }
 
@@ -82,7 +83,7 @@ public class ActionManagerTest {
     @Test
     public void testQuitOptionSelect() {
         when(mockApp.isLoggedIn()).thenReturn(true);
-        start("8"); // Assuming 6 is the quit option
+        start("9"); // Assuming 6 is the quit option
         verify(mockApp).quit();
     }
 

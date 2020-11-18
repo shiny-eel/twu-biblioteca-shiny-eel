@@ -59,6 +59,7 @@ public class ActionManager {
         actions.add(new ReturnBookAction(io, lib));
         actions.add(new ListMoviesAction(io, lib));
         actions.add(new CheckoutMovieAction(io, lib, app));
+        actions.add(new ReturnMovieAction(io, lib));
         actions.add(new ViewInfoAction(io, app));
         actions.add(new QuitAction(io, app));
     }
