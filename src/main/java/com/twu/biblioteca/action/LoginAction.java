@@ -31,7 +31,7 @@ public class LoginAction extends Action {
         io.println(PROMPT_LIB_NUMBER);
         String id = io.getInput();
         io.println(PROMPT_PASSWORD);
-        String password = io.getInput();
+        String password = io.getInputHidden();
 
         User user = registry.getUser(id);
         if (user != null && user.getPassword().equals(password)) {

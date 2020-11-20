@@ -2,7 +2,11 @@ package com.twu.biblioteca.io;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.Console;
 import java.io.PrintStream;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * For creating a test environment in which an IO object can have
@@ -15,6 +19,10 @@ public class IOHarness {
     public IO createTestIO(String input) {
         ByteArrayInputStream is = new ByteArrayInputStream(input.getBytes());
         os = new ByteArrayOutputStream();
+//        Console console = mock(Console.class);
+
+//        when(console.readPassword()).thenReturn(input.toCharArray());
+//        return new IO(is, new PrintStream(os), console);
         return new IO(is, new PrintStream(os));
     }
 
